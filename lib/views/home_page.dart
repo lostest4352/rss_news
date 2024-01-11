@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
                   itemCount: getFeed.listVal.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                      title: Text(getFeed.listVal[index]),
+                      title: SelectableText(getFeed.listVal[index]),
                     );
                   },
                 ),

@@ -38,7 +38,7 @@ class GetFeed with ChangeNotifier {
 
       // debugPrint(xmlValue.toString());
     } else {
-      debugPrint("error happened");
+      debugPrint(response.body);
     }
   }
 }
