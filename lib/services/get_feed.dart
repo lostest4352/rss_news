@@ -22,18 +22,18 @@ class GetFeed with ChangeNotifier {
       final elements = xmlValue.findAllElements("item");
 
       for (final elem in elements.toList()) {
-        final values = elem.findAllElements("title");
-        for (final val in values.toList()) {
-          String outputString =
-              val.toString().replaceAll(RegExp(r'<title>|<\/title>'), '');
-          // String output = htmlUnescape.convert(outputString);
-          String output =
-              utf8.decode(latin1.encode(htmlEntityDecode(outputString)));
-          listVal.add(output);
-          notifyListeners();
+        final values = elem.findElements("title");
 
-          debugPrint(output);
-        }
+        // Only one title inside "item". So first works. toString() without first returns items inside brackets
+        final val = values.first.toString();
+        String outputString = val.replaceAll(RegExp(r'<title>|<\/title>'), '');
+
+        String output =
+            utf8.decode(latin1.encode(htmlEntityDecode(outputString)));
+        listVal.add(output);
+        notifyListeners();
+
+        debugPrint(output);
       }
 
       // debugPrint(xmlValue.toString());
