@@ -29,7 +29,7 @@ class GetFeed with ChangeNotifier {
         String outputString = val.replaceAll(RegExp(r'<title>|<\/title>'), '');
 
         String output =
-            utf8.decode(latin1.encode(htmlEntityDecode(outputString)));
+            utf8.decode(latin1.encode(htmlUnescape.convert(outputString)));
         listVal.add(output);
         notifyListeners();
 
@@ -43,9 +43,9 @@ class GetFeed with ChangeNotifier {
   }
 }
 
-String htmlEntityDecode(String input) {
-  final text = input.replaceAllMapped(RegExp(r'&#(\d+);'),
-      (match) => String.fromCharCode(int.parse(match.group(1)!)));
-  return text.replaceAllMapped(RegExp(r'&#x([0-9A-Fa-f]+);'),
-      (match) => String.fromCharCode(int.parse(match.group(1)!, radix: 16)));
-}
+// String htmlEntityDecode(String input) {
+//   final text = input.replaceAllMapped(RegExp(r'&#(\d+);'),
+//       (match) => String.fromCharCode(int.parse(match.group(1)!)));
+//   return text.replaceAllMapped(RegExp(r'&#x([0-9A-Fa-f]+);'),
+//       (match) => String.fromCharCode(int.parse(match.group(1)!, radix: 16)));
+// }
