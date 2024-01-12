@@ -36,12 +36,13 @@ class GetFeed with ChangeNotifier {
         final getMediaEl = elem.findElements("media:content");
         final imagesVal = getMediaEl.firstOrNull?.getAttribute("url");
         if (imagesVal != null) {
+          final newVal = imagesVal.removeTags();
           // debugPrint(imagesVal);
-          listImg.add(imagesVal);
+          listImg.add(newVal);
         }
 
         //  TODO link
-        final link = elem.findElements("link").single.innerText;
+        final link = elem.findElements("link").single.innerText.removeTags(); // TODO remove removetax if issue happen
 
         // TODO description
         final description =
