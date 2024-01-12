@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:http/http.dart' as http;
-import 'package:that_app/global_vars/regex_values.dart';
 import 'package:that_app/models/news_class.dart';
 import 'package:xml/xml.dart';
 
@@ -28,10 +27,9 @@ class GetFeed with ChangeNotifier {
 
       for (final elem in elements.toList()) {
         // TODO Title
-        final title = elem.getElement("title");
-        final fixedTitle =
-            title.toString().removeTags(regexElement: titleRegex);
-        listVal.add(fixedTitle.toString());
+        final title = elem.findElements("title").single.innerText.removeTags();
+
+        listVal.add(title);
         // debugPrint(fixedTitle.toString());
 
         // TODO Image
@@ -43,21 +41,18 @@ class GetFeed with ChangeNotifier {
         }
 
         //  TODO link
-        final link = elem.getElement("link");
-        final fixedLink = link.toString().removeTags(regexElement: linkRegex);
+        final link = elem.findElements("link").single.innerText;
 
         // TODO description
-        final description = elem.getElement("description");
-        final fixedDescription =
-            description.toString().removeTags(regexElement: descriptionRegex);
+        final description =
+            elem.findElements("description").single.innerText.removeTags();
 
         // TODO pubDate
-        final pubDate = elem.getElement("pubDate");
-        final fixedPubDate =
-            pubDate.toString().removeTags(regexElement: pubDateRegex);
+        final pubDate = elem.findElements("pubDate").single.innerText;
 
         // TODO print
-        debugPrint(fixedPubDate);
+
+        debugPrint(title);
 
         //
         // final NewsClass newsClass = NewsClass(
@@ -87,15 +82,19 @@ class GetFeed with ChangeNotifier {
 //       (match) => String.fromCharCode(int.parse(match.group(1)!, radix: 16)));
 // }
 
-// TODO extension if needed
-
 extension XmlHelper on String {
   // RegExp(r'<title>|<\/title>')
-  String removeTags({required String regexElement}) {
-    String outputString = replaceAll(RegExp(regexElement), '');
+  // String removeRegexTags({required String regexElement}) {
+  //   String outputString = replaceAll(RegExp(regexElement), '');
 
-    String output =
-        utf8.decode(latin1.encode(HtmlUnescape().convert(outputString)));
-    return output;
+  //   String output =
+  //       utf8.decode(latin1.encode(HtmlUnescape().convert(outputString)));
+  //   return output;
+  // }
+
+  String removeTags() {
+    final convertedText =
+        utf8.decode(latin1.encode(HtmlUnescape().convert(this)));
+    return convertedText;
   }
 }
