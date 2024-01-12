@@ -23,17 +23,18 @@ class GetFeed with ChangeNotifier {
     if (response.statusCode == 200) {
       final xmlValue = XmlDocument.parse(response.body);
 
-      final elements = xmlValue.findAllElements("item");
+      final itemListFromXml = xmlValue.findAllElements("item");
 
-      for (final elem in elements.toList()) {
+      for (final listElement in itemListFromXml.toList()) {
         // TODO Title
-        final title = elem.findElements("title").single.innerText.removeTags();
+        final title =
+            listElement.findElements("title").single.innerText.removeTags();
 
         listVal.add(title);
         // debugPrint(fixedTitle.toString());
 
         // TODO Image
-        final getMediaEl = elem.findElements("media:content");
+        final getMediaEl = listElement.findElements("media:content");
         final imagesVal = getMediaEl.firstOrNull?.getAttribute("url");
         if (imagesVal != null) {
           final newVal = imagesVal.removeTags();
@@ -42,14 +43,21 @@ class GetFeed with ChangeNotifier {
         }
 
         //  TODO link
-        final link = elem.findElements("link").single.innerText.removeTags(); // TODO remove removetax if issue happen
+        final link = listElement
+            .findElements("link")
+            .single
+            .innerText
+            .removeTags(); // TODO remove removetax if issue happen
 
         // TODO description
-        final description =
-            elem.findElements("description").single.innerText.removeTags();
+        final description = listElement
+            .findElements("description")
+            .single
+            .innerText
+            .removeTags();
 
         // TODO pubDate
-        final pubDate = elem.findElements("pubDate").single.innerText;
+        final pubDate = listElement.findElements("pubDate").single.innerText;
 
         // TODO print
 
