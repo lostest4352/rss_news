@@ -32,9 +32,10 @@ class _HomePageState extends State<HomePage> {
                 child: ListView.builder(
                   itemCount: getFeed.listVal.length,
                   itemBuilder: (context, index) {
-                    return ListTile(
-                      title: SelectableText(getFeed.listVal[index]),
-                    );
+                    // return ListTile(
+                    //   title: SelectableText(getFeed.listVal[index]),
+                    // );
+                    return Image.network(getFeed.listImg[index]);
                   },
                 ),
               ),

@@ -9,6 +9,8 @@ import 'package:xml/xml.dart';
 class GetFeed with ChangeNotifier {
   final List<String> listVal = [];
 
+  final List<String> listImg = [];
+
   final HtmlUnescape htmlUnescape = HtmlUnescape();
 
   final xmlUrl =
@@ -23,6 +25,7 @@ class GetFeed with ChangeNotifier {
       final elements = xmlValue.findAllElements("item");
 
       for (final elem in elements.toList()) {
+        // TODO Title
         final values = elem.findElements("title");
 
         // Only one title inside "item". So first works. toString() without first returns items inside brackets
@@ -34,7 +37,16 @@ class GetFeed with ChangeNotifier {
         listVal.add(output);
         notifyListeners();
 
-        debugPrint(output);
+        // debugPrint(output);
+
+        // TODO Image
+        final getMediaEl = elem.findElements("media:content");
+
+        final imagesVal = getMediaEl.first.getAttribute("url");
+        if (imagesVal != null) {
+          debugPrint(imagesVal);
+          listImg.add(imagesVal);
+        }
 
         //
         // final NewsClass newsClass = NewsClass(
@@ -62,8 +74,6 @@ class GetFeed with ChangeNotifier {
 //       (match) => String.fromCharCode(int.parse(match.group(1)!, radix: 16)));
 // }
 
-
-
 // TODO
 extension StringXML on String {
   String convertTitle() {
@@ -81,7 +91,8 @@ extension StringXML on String {
   }
 
   String convertDescription() {
-    final replaceTagsString = replaceAll(RegExp(r'<description>|<\/description>'), '');
+    final replaceTagsString =
+        replaceAll(RegExp(r'<description>|<\/description>'), '');
     final decodedTitle =
         utf8.decode(latin1.encode(HtmlUnescape().convert(replaceTagsString)));
     return decodedTitle;
@@ -96,13 +107,12 @@ extension StringXML on String {
 
   // TODO
   String convertContent() {
-    final replaceTagsString = replaceAll(RegExp(r'<content:encoded>|<\/content:encoded>'), '');
+    final replaceTagsString =
+        replaceAll(RegExp(r'<content:encoded>|<\/content:encoded>'), '');
     final decodedTitle =
         utf8.decode(latin1.encode(HtmlUnescape().convert(replaceTagsString)));
     return decodedTitle;
   }
 
   // TODO Image link and ImageSource
-
-  
 }
