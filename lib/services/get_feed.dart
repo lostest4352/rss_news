@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:http/http.dart' as http;
+import 'package:that_app/global_vars/regex_values.dart';
 import 'package:that_app/models/news_class.dart';
 import 'package:xml/xml.dart';
 
@@ -10,6 +11,9 @@ class GetFeed with ChangeNotifier {
   final List<String> listVal = [];
 
   final List<String> listImg = [];
+
+  // TODO
+  final List<NewsClass> newsClassList = [];
 
   final xmlUrl =
       Uri.parse("https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml");
@@ -26,7 +30,7 @@ class GetFeed with ChangeNotifier {
         // TODO Title
         final title = elem.getElement("title");
         final fixedTitle =
-            title.toString().removeTags(element: r'<title>|<\/title>');
+            title.toString().removeTags(regexElement: titleRegex);
         listVal.add(fixedTitle.toString());
         // debugPrint(fixedTitle.toString());
 
@@ -40,18 +44,17 @@ class GetFeed with ChangeNotifier {
 
         //  TODO link
         final link = elem.getElement("link");
-        final fixedLink =
-            link.toString().removeTags(element: r'<link>|<\/link>');
+        final fixedLink = link.toString().removeTags(regexElement: linkRegex);
 
         // TODO description
         final description = elem.getElement("description");
-        final fixedDescription = description
-            .toString()
-            .removeTags(element: r'<description>|<\/description>');
+        final fixedDescription =
+            description.toString().removeTags(regexElement: descriptionRegex);
 
         // TODO pubDate
         final pubDate = elem.getElement("pubDate");
-        final fixedPubDate = pubDate.toString().removeTags(element: r'<pubDate>|<\/pubDate>');
+        final fixedPubDate =
+            pubDate.toString().removeTags(regexElement: pubDateRegex);
 
         // TODO print
         debugPrint(fixedPubDate);
@@ -88,8 +91,8 @@ class GetFeed with ChangeNotifier {
 
 extension XmlHelper on String {
   // RegExp(r'<title>|<\/title>')
-  String removeTags({required String element}) {
-    String outputString = replaceAll(RegExp(element), '');
+  String removeTags({required String regexElement}) {
+    String outputString = replaceAll(RegExp(regexElement), '');
 
     String output =
         utf8.decode(latin1.encode(HtmlUnescape().convert(outputString)));
