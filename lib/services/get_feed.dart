@@ -34,7 +34,7 @@ class GetFeed with ChangeNotifier {
 
         // TODO Image
         final getMediaEl = elem.findElements("media:content");
-        final imagesVal = getMediaEl.first.getAttribute("url");
+        final imagesVal = getMediaEl.firstOrNull?.getAttribute("url");
         if (imagesVal != null) {
           // debugPrint(imagesVal);
           listImg.add(imagesVal);
