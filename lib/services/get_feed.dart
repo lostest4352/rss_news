@@ -25,7 +25,8 @@ class GetFeed with ChangeNotifier {
       for (final elem in elements.toList()) {
         // TODO Title
         final title = elem.getElement("title");
-        final fixedTitle = title.toString().removeTags(element: r'<title>|<\/title>');
+        final fixedTitle =
+            title.toString().removeTags(element: r'<title>|<\/title>');
         listVal.add(fixedTitle.toString());
         // debugPrint(fixedTitle.toString());
 
@@ -39,16 +40,21 @@ class GetFeed with ChangeNotifier {
 
         //  TODO link
         final link = elem.getElement("link");
-        final fixedLink = link.toString().removeTags(element: r'<link>|<\/link>');
+        final fixedLink =
+            link.toString().removeTags(element: r'<link>|<\/link>');
 
         // TODO description
         final description = elem.getElement("description");
-        final fixedDescription = description.toString().removeTags(element: r'<description>|<\/description>');
+        final fixedDescription = description
+            .toString()
+            .removeTags(element: r'<description>|<\/description>');
 
         // TODO pubDate
         final pubDate = elem.getElement("pubDate");
-        // final DateTime pubD = DateTime.parse(pubDate!);
-        debugPrint(fixedLink);
+        final fixedPubDate = pubDate.toString().removeTags(element: r'<pubDate>|<\/pubDate>');
+
+        // TODO print
+        debugPrint(fixedPubDate);
 
         //
         // final NewsClass newsClass = NewsClass(
