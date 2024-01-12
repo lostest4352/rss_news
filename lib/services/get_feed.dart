@@ -24,31 +24,31 @@ class GetFeed with ChangeNotifier {
 
       for (final elem in elements.toList()) {
         // TODO Title
-        // final titleELm = elem.findElements("title");
-        // elem.getElement("title")
         final title = elem.getElement("title");
-
-        final newTitle = title.toString().removeTags();
-
-        listVal.add(newTitle.toString());
-
-        debugPrint(newTitle.toString());
+        final fixedTitle = title.toString().removeTags(element: r'<title>|<\/title>');
+        listVal.add(fixedTitle.toString());
+        // debugPrint(fixedTitle.toString());
 
         // TODO Image
         final getMediaEl = elem.findElements("media:content");
-
         final imagesVal = getMediaEl.first.getAttribute("url");
         if (imagesVal != null) {
           // debugPrint(imagesVal);
           listImg.add(imagesVal);
         }
 
-        //
-        final link = elem.getAttribute("link");
-        final description = elem.getAttribute("description");
-        final pubDate = elem.getAttribute("pubDate");
+        //  TODO link
+        final link = elem.getElement("link");
+        final fixedLink = link.toString().removeTags(element: r'<link>|<\/link>');
+
+        // TODO description
+        final description = elem.getElement("description");
+        final fixedDescription = description.toString().removeTags(element: r'<description>|<\/description>');
+
+        // TODO pubDate
+        final pubDate = elem.getElement("pubDate");
         // final DateTime pubD = DateTime.parse(pubDate!);
-        // debugPrint(title);
+        debugPrint(fixedLink);
 
         //
         // final NewsClass newsClass = NewsClass(
@@ -81,8 +81,9 @@ class GetFeed with ChangeNotifier {
 // TODO extension if needed
 
 extension XmlHelper on String {
-  String removeTags() {
-    String outputString = replaceAll(RegExp(r'<title>|<\/title>'), '');
+  // RegExp(r'<title>|<\/title>')
+  String removeTags({required String element}) {
+    String outputString = replaceAll(RegExp(element), '');
 
     String output =
         utf8.decode(latin1.encode(HtmlUnescape().convert(outputString)));
