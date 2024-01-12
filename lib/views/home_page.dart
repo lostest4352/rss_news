@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:that_app/services/get_feed.dart';
 
@@ -39,7 +40,15 @@ class _HomePageState extends State<HomePage> {
                         ),
                         () {
                           if (index < getFeed.listImg.length) {
-                            return Image.network(getFeed.listImg[index]);
+                            return CachedNetworkImage(
+                              imageUrl: getFeed.listImg[index],
+                              placeholder: (context, url) =>
+                                  const CircularProgressIndicator(),
+                              errorWidget: (context, url, error) {
+                                return const Icon(Icons.error);
+                              },
+                            );
+                            // return Image.network(getFeed.listImg[index]);
                           } else {
                             return const Center();
                           }
