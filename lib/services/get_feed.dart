@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:html_unescape/html_unescape.dart';
 import 'package:http/http.dart' as http;
 import 'package:that_app/models/news_class.dart';
 import 'package:xml/xml.dart';
@@ -9,8 +10,6 @@ class GetFeed with ChangeNotifier {
   final List<String> listVal = [];
 
   final List<String> listImg = [];
-
-
 
   final xmlUrl =
       Uri.parse("https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml");
@@ -25,20 +24,31 @@ class GetFeed with ChangeNotifier {
 
       for (final elem in elements.toList()) {
         // TODO Title
-        final title = elem.getAttribute("title");
-        listVal.add(title.toString());
-        
+        // final titleELm = elem.findElements("title");
+        // elem.getElement("title")
+        final title = elem.getElement("title");
 
-        // debugPrint(output);
+        final newTitle = title.toString().removeTags();
+
+        listVal.add(newTitle.toString());
+
+        debugPrint(newTitle.toString());
 
         // TODO Image
         final getMediaEl = elem.findElements("media:content");
 
         final imagesVal = getMediaEl.first.getAttribute("url");
         if (imagesVal != null) {
-          debugPrint(imagesVal);
+          // debugPrint(imagesVal);
           listImg.add(imagesVal);
         }
+
+        //
+        final link = elem.getAttribute("link");
+        final description = elem.getAttribute("description");
+        final pubDate = elem.getAttribute("pubDate");
+        // final DateTime pubD = DateTime.parse(pubDate!);
+        // debugPrint(title);
 
         //
         // final NewsClass newsClass = NewsClass(
@@ -50,7 +60,6 @@ class GetFeed with ChangeNotifier {
         //   imageLink: imageLink,
         //   imageContent: imageContent,
         // );
-
 
         notifyListeners(); // Important
       }
@@ -69,8 +78,14 @@ class GetFeed with ChangeNotifier {
 //       (match) => String.fromCharCode(int.parse(match.group(1)!, radix: 16)));
 // }
 
-
-
-
-
 // TODO extension if needed
+
+extension XmlHelper on String {
+  String removeTags() {
+    String outputString = replaceAll(RegExp(r'<title>|<\/title>'), '');
+
+    String output =
+        utf8.decode(latin1.encode(HtmlUnescape().convert(outputString)));
+    return output;
+  }
+}
