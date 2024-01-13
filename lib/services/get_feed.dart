@@ -7,9 +7,9 @@ import 'package:that_app/models/news_class.dart';
 import 'package:xml/xml.dart';
 
 class GetFeed with ChangeNotifier {
-  final List<String> listVal = [];
+  // final List<String> listVal = [];
 
-  final List<String> listImg = [];
+  // final List<String> listImg = [];
 
   // TODO
   final List<NewsClass> newsClassList = [];
@@ -30,49 +30,56 @@ class GetFeed with ChangeNotifier {
         final title =
             listElement.findElements("title").single.innerText.removeTags();
 
-        listVal.add(title);
+        // listVal.add(title);
         // debugPrint(fixedTitle.toString());
 
-        // TODO Image
+        // TODO  Image inside media:content
         final getMediaEl = listElement.findElements("media:content");
-        final imagesVal = getMediaEl.firstOrNull?.getAttribute("url");
-        if (imagesVal != null) {
-          final newVal = imagesVal.removeTags();
-          // debugPrint(imagesVal);
-          listImg.add(newVal);
-        }
+        final String? innerImageLink = getMediaEl.firstOrNull?.getAttribute("url").toString().removeTags();
+        // if (imagesVal != null) {
+        //   final newVal = imagesVal.removeTags();
+        //   // debugPrint(imagesVal);
+        //   // listImg.add(newVal);
+        // }
 
         //  TODO link
-        final link = listElement
+        final String imageLink = listElement
             .findElements("link")
             .single
             .innerText
             .removeTags(); // TODO remove removetax if issue happen
 
         // TODO description
-        final description = listElement
+        final String description = listElement
             .findElements("description")
             .single
             .innerText
             .removeTags();
 
         // TODO pubDate
-        final pubDate = listElement.findElements("pubDate").single.innerText;
+        final String pubDate =
+            listElement.findElements("pubDate").single.innerText;
+
+        // TODO content
+        // final String content =
+        //     listElement.findElements("content").single.innerText;
 
         // TODO print
 
-        debugPrint(title);
+        // debugPrint(title);
 
         //
-        // final NewsClass newsClass = NewsClass(
-        //   title: output,
-        //   link: link,
-        //   description: description,
-        //   pubDate: pubDate,
-        //   content: content,
-        //   imageLink: imageLink,
-        //   imageContent: imageContent,
-        // );
+        final NewsClass newsClass = NewsClass(
+          title: title,
+          link: imageLink,
+          description: description,
+          pubDate: pubDate,
+          content: null,
+          imageLink: imageLink,
+          innerImageLink: innerImageLink,
+        );
+        newsClassList.add(newsClass);
+        
 
         notifyListeners(); // Important
       }

@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class NewsClass {
   final String title;
   final String? link;
@@ -7,7 +5,7 @@ class NewsClass {
   final String? pubDate;
   final String? content;
   final String? imageLink;
-  final Image? imageContent;
+  final String? innerImageLink;
 
   NewsClass({
     required this.title,
@@ -16,6 +14,6 @@ class NewsClass {
     required this.pubDate,
     required this.content,
     required this.imageLink,
-    required this.imageContent,
+    this.innerImageLink,
   });
 }

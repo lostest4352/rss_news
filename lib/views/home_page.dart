@@ -31,28 +31,58 @@ class _HomePageState extends State<HomePage> {
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: getFeed.listVal.length,
+                  itemCount: getFeed.newsClassList.length,
                   itemBuilder: (context, index) {
+                    final classList = getFeed.newsClassList;
                     return Column(
                       children: [
                         ListTile(
-                          title: SelectableText(getFeed.listVal[index]),
+                          title: SelectableText(classList[index].title),
+                          subtitle: () {
+                            if (classList[index].description != null) {
+                              return SelectableText(
+                                  classList[index].description!);
+                            }
+                          }(),
                         ),
-                        () {
-                          if (index < getFeed.listImg.length) {
-                            return CachedNetworkImage(
-                              imageUrl: getFeed.listImg[index],
-                              placeholder: (context, url) =>
-                                  const CircularProgressIndicator(),
-                              errorWidget: (context, url, error) {
-                                return const Icon(Icons.error);
-                              },
-                            );
-                            // return Image.network(getFeed.listImg[index]);
-                          } else {
-                            return const Center();
-                          }
-                        }(),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Builder(
+                            builder: (context) {
+                              final imgLink = classList[index].innerImageLink;
+                              if (imgLink != null) {
+                                return CachedNetworkImage(
+                                  imageUrl: classList[index].innerImageLink!,
+                                  placeholder: (context, url) =>
+                                      const CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) {
+                                    return const Icon(Icons.error);
+                                  },
+                                );
+                              } else {
+                                return const Center(
+                                  child: Icon(Icons.error),
+                                );
+                              }
+                            },
+                          ),
+                        ),
+
+                        // () {
+                        //   if (index < getFeed.listImg.length) {
+                        //     return CachedNetworkImage(
+                        //       imageUrl: getFeed.listImg[index],
+                        //       placeholder: (context, url) =>
+                        //           const CircularProgressIndicator(),
+                        //       errorWidget: (context, url, error) {
+                        //         return const Icon(Icons.error);
+                        //       },
+                        //     );
+                        //     // return Image.network(getFeed.listImg[index]);
+                        //   } else {
+                        //     return const Center();
+                        //   }
+                        // }(),
                       ],
                     );
                     // return Image.network(getFeed.listImg[index]);
