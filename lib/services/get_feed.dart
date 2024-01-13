@@ -9,11 +9,10 @@ import 'package:xml/xml.dart';
 class GetFeed with ChangeNotifier {
   final List<NewsClass> newsClassList = [];
 
-  
-
   void getData(String newsUrl) async {
-    final xmlUrl =
-      Uri.parse(newsUrl);
+    //
+    newsClassList.clear();
+    final xmlUrl = Uri.parse(newsUrl);
     final response = await http.get(xmlUrl);
 
     if (response.statusCode == 200) {
@@ -73,7 +72,7 @@ class GetFeed with ChangeNotifier {
 extension XmlHelper on String {
   String removeTags() {
     final convertedText =
-        utf8.decode(latin1.encode(HtmlUnescape().convert(this)));
+        utf8.decode(utf8.encode(HtmlUnescape().convert(this)));
     return convertedText;
   }
 }
