@@ -38,12 +38,16 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         ListTile(
                           title: SelectableText(classList[index].title),
-                          subtitle: () {
-                            if (classList[index].description != null) {
-                              return SelectableText(
-                                  classList[index].description!);
-                            }
-                          }(),
+                          subtitle: Builder(
+                            builder: (context) {
+                              if (classList[index].description != null) {
+                                return SelectableText(
+                                    classList[index].description!);
+                              } else {
+                                return const Center();
+                              }
+                            },
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -52,7 +56,7 @@ class _HomePageState extends State<HomePage> {
                               final imgLink = classList[index].innerImageLink;
                               if (imgLink != null) {
                                 return CachedNetworkImage(
-                                  imageUrl: classList[index].innerImageLink!,
+                                  imageUrl: imgLink,
                                   placeholder: (context, url) =>
                                       const CircularProgressIndicator(),
                                   errorWidget: (context, url, error) {
@@ -67,22 +71,6 @@ class _HomePageState extends State<HomePage> {
                             },
                           ),
                         ),
-
-                        // () {
-                        //   if (index < getFeed.listImg.length) {
-                        //     return CachedNetworkImage(
-                        //       imageUrl: getFeed.listImg[index],
-                        //       placeholder: (context, url) =>
-                        //           const CircularProgressIndicator(),
-                        //       errorWidget: (context, url, error) {
-                        //         return const Icon(Icons.error);
-                        //       },
-                        //     );
-                        //     // return Image.network(getFeed.listImg[index]);
-                        //   } else {
-                        //     return const Center();
-                        //   }
-                        // }(),
                       ],
                     );
                     // return Image.network(getFeed.listImg[index]);
