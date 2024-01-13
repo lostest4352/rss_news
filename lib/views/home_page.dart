@@ -27,14 +27,17 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   IconButton(
                     onPressed: () {
-                      getFeed.getData("https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml");
+                      getFeed.getData(
+                          "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml");
                     },
                     icon: const Icon(Icons.add),
                   ),
-                  IconButton(onPressed: () {
-                    getFeed.getData('https://www.onlinekhabar.com/feed');
-                    
-                  }, icon: Icon(Icons.newspaper_rounded))
+                  IconButton(
+                    onPressed: () {
+                      getFeed.getData('https://www.onlinekhabar.com/feed');
+                    },
+                    icon: const Icon(Icons.newspaper_rounded),
+                  ),
                 ],
               ),
               Expanded(
@@ -52,8 +55,7 @@ class _HomePageState extends State<HomePage> {
                             subtitle: Builder(
                               builder: (context) {
                                 if (classList[index].description != null) {
-                                  return Text(
-                                      classList[index].description!);
+                                  return Text(classList[index].description!);
                                 } else {
                                   return const Center();
                                 }

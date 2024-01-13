@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:http/http.dart' as http;
@@ -71,29 +69,29 @@ class GetFeed with ChangeNotifier {
 
 extension XmlHelper on String {
   String removeTags() {
-    final convertedText =
-        utf8.decode(utf8.encode(HtmlUnescape().convert(this)));
-    return convertedText;
+    // final convertedText =
+    //    utf8.decode(latin1.encode(HtmlUnescape().convert(this)));
+    final convertedText = HtmlUnescape().convert(this);
+    final decodedText = convertedText.replaceAll(RegExp(r"â"), "'");
+    return decodedText;
   }
 }
-
-
 
 // Saved
 // Regex inside extension
 // RegExp(r'<title>|<\/title>')
-  // String removeRegexTags({required String regexElement}) {
-  //   String outputString = replaceAll(RegExp(regexElement), '');
+// String removeRegexTags({required String regexElement}) {
+//   String outputString = replaceAll(RegExp(regexElement), '');
 
-  //   String output =
-  //       utf8.decode(latin1.encode(HtmlUnescape().convert(outputString)));
-  //   return output;
-  // }
+//   String output =
+//       utf8.decode(latin1.encode(HtmlUnescape().convert(outputString)));
+//   return output;
+// }
 
 // Regex to parse xml
-// String htmlEntityDecode(String input) {
-//   final text = input.replaceAllMapped(RegExp(r'&#(\d+);'),
-//       (match) => String.fromCharCode(int.parse(match.group(1)!)));
-//   return text.replaceAllMapped(RegExp(r'&#x([0-9A-Fa-f]+);'),
-//       (match) => String.fromCharCode(int.parse(match.group(1)!, radix: 16)));
-// }
+String htmlEntityDecode(String input) {
+  final text = input.replaceAllMapped(RegExp(r'&#(\d+);'),
+      (match) => String.fromCharCode(int.parse(match.group(1)!)));
+  return text.replaceAllMapped(RegExp(r'&#x([0-9A-Fa-f]+);'),
+      (match) => String.fromCharCode(int.parse(match.group(1)!, radix: 16)));
+}
