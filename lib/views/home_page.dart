@@ -23,11 +23,19 @@ class _HomePageState extends State<HomePage> {
         builder: (context, child) {
           return Column(
             children: [
-              IconButton(
-                onPressed: () {
-                  getFeed.getData();
-                },
-                icon: const Icon(Icons.add),
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      getFeed.getData("https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml");
+                    },
+                    icon: const Icon(Icons.add),
+                  ),
+                  IconButton(onPressed: () {
+                    getFeed.getData('https://www.onlinekhabar.com/feed');
+                    
+                  }, icon: Icon(Icons.newspaper_rounded))
+                ],
               ),
               Expanded(
                 child: ListView.builder(

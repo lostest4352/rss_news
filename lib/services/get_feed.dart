@@ -9,10 +9,11 @@ import 'package:xml/xml.dart';
 class GetFeed with ChangeNotifier {
   final List<NewsClass> newsClassList = [];
 
-  final xmlUrl =
-      Uri.parse("https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml");
+  
 
-  void getData() async {
+  void getData(String newsUrl) async {
+    final xmlUrl =
+      Uri.parse(newsUrl);
     final response = await http.get(xmlUrl);
 
     if (response.statusCode == 200) {
