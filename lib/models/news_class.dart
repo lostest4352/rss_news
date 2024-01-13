@@ -14,6 +14,6 @@ class NewsClass {
     required this.pubDate,
     required this.content,
     required this.imageLink,
-    this.innerImageLink,
+    required this.innerImageLink,
   });
 }
