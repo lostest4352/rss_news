@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                                 );
                               } else {
                                 return const Center(
-                                  child: Icon(Icons.error),
+                                  child: Icon(Icons.newspaper),
                                 );
                               }
                             },

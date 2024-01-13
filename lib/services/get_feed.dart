@@ -60,6 +60,7 @@ class GetFeed with ChangeNotifier {
           innerImageLink: innerImageLink,
         );
         newsClassList.add(newsClass);
+        // debugPrint(innerImageLink);
         notifyListeners();
       }
     } else {
