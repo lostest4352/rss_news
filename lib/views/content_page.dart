@@ -14,7 +14,10 @@ class ContentPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("News Page"),
+        title: Text(
+          newsClass.title,
+          style: const TextStyle(overflow: TextOverflow.fade),
+        ),
       ),
       body: Center(
         child: ListView(

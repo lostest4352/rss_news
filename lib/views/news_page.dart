@@ -18,7 +18,7 @@ class _NewsPageState extends State<NewsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("That App"),
+        title: const Text("News Lists"),
       ),
       body: Consumer<GetFeed>(
         builder: (context, value, child) {
