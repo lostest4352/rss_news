@@ -22,15 +22,48 @@ class ContentPage extends StatelessWidget {
       body: Center(
         child: ListView(
           children: [
-            ListTile(
-              title: Text(newsClass.title),
-              subtitle: Text(newsClass.description ?? ""),
+            const SizedBox(
+              height: 5,
             ),
-            ColoredBox(
-              color: Colors.black45,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(newsClass.content ?? ""),
+            Container(
+              color: Colors.black26,
+              padding: const EdgeInsets.all(8),
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                children: [
+                  Text(
+                    newsClass.title,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 22),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            SizedBox(
+              child: Builder(
+                builder: (context) {
+                  String textToShow = '';
+                  final description = newsClass.description;
+                  final content = newsClass.content;
+
+                  if (content != null) {
+                    textToShow = content;
+                  } else if (content == null && description != null) {
+                    textToShow = description;
+                  } else {
+                    textToShow = '';
+                  }
+                  return ColoredBox(
+                    color: Colors.black45,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(textToShow),
+                    ),
+                  );
+                },
               ),
             ),
             Builder(
