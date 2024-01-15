@@ -44,15 +44,25 @@ class GetFeed with ChangeNotifier {
             listElement.findElements("pubDate").single.innerText;
 
         // TODO content
-        final val = listElement.findElements("content:encoded").first;
+        String? getElement() {
+          try {
+            final val = listElement.findElements("content:encoded").first;
 
-        final newVal = val.toString().replaceAll(RegExp(r"<content:encoded>|<\/content:encoded>|!\[CDATA\[|<p>|<\/p>"), '').removeTags();
+            final String newVal = val
+                .toString()
+                .replaceAll(
+                    RegExp(
+                        r"<content:encoded>|<\/content:encoded>|!\[CDATA\[|<p>|<\/p>"),
+                    '')
+                .removeTags();
+            return newVal;
+          } catch (e) {
+            debugPrint("content doesnt exist in this website");
+            return null;
+          }
+        }
 
-
-
-          
-        debugPrint(val.toString());
-
+        // debugPrint(val.toString());
 
         //
         final NewsClass newsClass = NewsClass(
@@ -60,7 +70,7 @@ class GetFeed with ChangeNotifier {
           link: imageLink,
           description: description,
           pubDate: pubDate,
-          content: newVal,
+          content: getElement(),
           imageLink: imageLink,
           innerImageLink: innerImageLink,
         );
