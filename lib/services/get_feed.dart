@@ -57,7 +57,7 @@ class GetFeed with ChangeNotifier {
                 pname.fold(pname[0].text, (previousValue, element) {
               return "$previousValue ${element.text}";
             });
-            return joinedName;
+            return joinedName.removeTags();
           } catch (e) {
             return null;
           }
@@ -86,8 +86,8 @@ class GetFeed with ChangeNotifier {
 extension XmlHelper on String {
   String removeTags() {
     final convertedText = HtmlUnescape().convert(this);
-    // Need to add duplicate â I dont know why but it doesnt work in some situations otherwise
-    final decodedText = convertedText.replaceAll(RegExp(r"â|â"), "'");
+    final decodedText  = convertedText.replaceAll(RegExp(r'â'), "'");
+
     return decodedText;
   }
 }

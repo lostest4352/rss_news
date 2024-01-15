@@ -60,7 +60,7 @@ class ContentPage extends StatelessWidget {
                     color: Colors.black45,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(textToShow),
+                      child: SelectableText(textToShow),
                     ),
                   );
                 },
