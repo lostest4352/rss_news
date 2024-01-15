@@ -55,7 +55,7 @@ class GetFeed with ChangeNotifier {
 
             final joinedName =
                 pname.fold(pname[0].text, (previousValue, element) {
-              return "$previousValue ${element.text}";
+              return "$previousValue\n \n ${element.text}";
             });
             return joinedName.removeTags();
           } catch (e) {
