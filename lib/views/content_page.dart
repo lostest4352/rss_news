@@ -26,9 +26,12 @@ class ContentPage extends StatelessWidget {
               title: Text(newsClass.title),
               subtitle: Text(newsClass.description ?? ""),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(child: Text(newsClass.content ?? "")),
+            ColoredBox(
+              color: Colors.black45,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(newsClass.content ?? ""),
+              ),
             ),
             Builder(
               builder: (context) {

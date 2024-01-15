@@ -3,6 +3,7 @@ import 'package:html_unescape/html_unescape.dart';
 import 'package:http/http.dart' as http;
 import 'package:that_app/models/news_class.dart';
 import 'package:xml/xml.dart';
+import 'package:html/parser.dart' show parse;
 
 class GetFeed with ChangeNotifier {
   final List<NewsClass> newsClassList = [];
@@ -43,30 +44,24 @@ class GetFeed with ChangeNotifier {
         final String pubDate =
             listElement.findElements("pubDate").single.innerText;
 
-        // TODO content
-        String? getElement() {
+        String? contentText() {
           try {
-            final val = listElement.findElements("content:encoded").first;
+            final innerTextVal =
+                listElement.findElements("content:encoded").single.innerText;
 
-            final String newVal = val
-                .toString()
-                .replaceAll(
-                    RegExp(
-                        r"<content:encoded>|<\/content:encoded>|!\[CDATA\[|<p>|<\/p>"),
-                    '')
-                .removeTags();
+            final htmlDoc = parse(innerTextVal);
 
-            return newVal;
+            final pname = htmlDoc.getElementsByTagName("p");
+
+            final joinedName =
+                pname.fold(pname[0].text, (previousValue, element) {
+              return "$previousValue ${element.text}";
+            });
+            return joinedName;
           } catch (e) {
-            debugPrint("content doesnt exist in this website");
             return null;
           }
         }
-
-        //
-        // final val = listElement.findElements("content:encoded").first;
-
-        // debugPrint(val.toString());
 
         //
         final NewsClass newsClass = NewsClass(
@@ -74,7 +69,7 @@ class GetFeed with ChangeNotifier {
           link: imageLink,
           description: description,
           pubDate: pubDate,
-          content: getElement(),
+          content: contentText(),
           imageLink: imageLink,
           innerImageLink: innerImageLink,
         );
@@ -90,8 +85,6 @@ class GetFeed with ChangeNotifier {
 
 extension XmlHelper on String {
   String removeTags() {
-    // final convertedText =
-    //    utf8.decode(latin1.encode(HtmlUnescape().convert(this)));
     final convertedText = HtmlUnescape().convert(this);
     // Need to add duplicate â I dont know why but it doesnt work in some situations otherwise
     final decodedText = convertedText.replaceAll(RegExp(r"â|â"), "'");
