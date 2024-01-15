@@ -55,12 +55,16 @@ class GetFeed with ChangeNotifier {
                         r"<content:encoded>|<\/content:encoded>|!\[CDATA\[|<p>|<\/p>"),
                     '')
                 .removeTags();
+
             return newVal;
           } catch (e) {
             debugPrint("content doesnt exist in this website");
             return null;
           }
         }
+
+        //
+        // final val = listElement.findElements("content:encoded").first;
 
         // debugPrint(val.toString());
 

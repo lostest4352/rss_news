@@ -1,3 +1,5 @@
+import 'package:provider/provider.dart';
+import 'package:that_app/services/get_feed.dart';
 import 'package:that_app/views/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -10,10 +12,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
-      home: const HomePage(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<GetFeed>(
+          create: (context) {
+            return GetFeed();
+          },
+        )
+      ],
+      builder: (context, snapshot) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData.dark(),
+          home: const HomePage(),
+        );
+      },
     );
   }
 }
