@@ -86,7 +86,9 @@ class GetFeed with ChangeNotifier {
 extension XmlHelper on String {
   String removeTags() {
     final convertedText = HtmlUnescape().convert(this);
-    final decodedText  = convertedText.replaceAll(RegExp(r'â'), "'");
+    debugPrint("before $convertedText");
+    final decodedText  = convertedText.replaceAll(RegExp(r'â|â|â|â|â'), "'");
+    debugPrint("after $decodedText");
 
     return decodedText;
   }
