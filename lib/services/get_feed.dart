@@ -89,7 +89,8 @@ extension XmlHelper on String {
     // final convertedText =
     //    utf8.decode(latin1.encode(HtmlUnescape().convert(this)));
     final convertedText = HtmlUnescape().convert(this);
-    final decodedText = convertedText.replaceAll(RegExp(r"â"), "'");
+    // Need to add duplicate â I dont know why but it doesnt work in some situations otherwise
+    final decodedText = convertedText.replaceAll(RegExp(r"â|â"), "'");
     return decodedText;
   }
 }
