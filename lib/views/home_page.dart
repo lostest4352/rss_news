@@ -82,6 +82,9 @@ class _HomePageState extends State<HomePage> {
                               },
                             ),
                           ),
+                          ListTile(
+                            title: Text(classList[index].content ?? "no val",),
+                          ),
                         ],
                       ),
                     );

@@ -44,8 +44,15 @@ class GetFeed with ChangeNotifier {
             listElement.findElements("pubDate").single.innerText;
 
         // TODO content
-        // final String content =
-        //     listElement.findElements("content").single.innerText;
+        final val = listElement.findElements("content:encoded").first;
+
+        final newVal = val.toString().replaceAll(RegExp(r"<content:encoded>|<\/content:encoded>|!\[CDATA\[|<p>|<\/p>"), '').removeTags();
+
+
+
+          
+        debugPrint(val.toString());
+
 
         //
         final NewsClass newsClass = NewsClass(
@@ -53,7 +60,7 @@ class GetFeed with ChangeNotifier {
           link: imageLink,
           description: description,
           pubDate: pubDate,
-          content: null,
+          content: newVal,
           imageLink: imageLink,
           innerImageLink: innerImageLink,
         );
