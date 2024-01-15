@@ -40,6 +40,25 @@ class HomePage extends StatelessWidget {
                 ListTile(
                   onTap: () {
                     value.getData(
+                      "https://nagariknews.nagariknetwork.com/feed",
+                    );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const NewsPage();
+                        },
+                      ),
+                    );
+                  },
+                  title: const Text("Nagarik News"),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                ListTile(
+                  onTap: () {
+                    value.getData(
                       "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
                     );
                     Navigator.push(
