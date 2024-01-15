@@ -17,35 +17,39 @@ class ContentPage extends StatelessWidget {
         title: const Text("News Page"),
       ),
       body: Center(
-          child: ListView(
-        children: [
-          ListTile(
-            title: Text(newsClass.title),
-            subtitle: Text(newsClass.description ?? ""),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Card(child: Text(newsClass.content ?? "")),
-          ),
-          Builder(
-            builder: (context) {
-              final imgLink = newsClass.innerImageLink;
-              if (imgLink != null) {
-                return CachedNetworkImage(
-                  imageUrl: imgLink,
-                  placeholder: (context, url) =>
-                      const CircularProgressIndicator(),
-                  errorWidget: (context, url, error) {
-                    return const Icon(Icons.error);
-                  },
-                );
-              } else {
-                return const Center();
-              }
-            },
-          ),
-        ],
-      )),
+        child: ListView(
+          children: [
+            ListTile(
+              title: Text(newsClass.title),
+              subtitle: Text(newsClass.description ?? ""),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(child: Text(newsClass.content ?? "")),
+            ),
+            Builder(
+              builder: (context) {
+                final imgLink = newsClass.innerImageLink;
+                if (imgLink != null) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CachedNetworkImage(
+                      imageUrl: imgLink,
+                      placeholder: (context, url) =>
+                          const CircularProgressIndicator(),
+                      errorWidget: (context, url, error) {
+                        return const Icon(Icons.error);
+                      },
+                    ),
+                  );
+                } else {
+                  return const Center();
+                }
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
