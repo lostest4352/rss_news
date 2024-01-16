@@ -12,6 +12,29 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("News App"),
       ),
+      drawer: Drawer(
+        child: Column(
+          children: [
+            const DrawerHeader(
+              child: Column(
+                children: [
+                  Spacer(),
+                  Text("News App"),
+                  Spacer(),
+                ],
+              ),
+            ),
+            ListTile(
+              onTap: () {},
+              title: const Text("Home Page"),
+            ),
+            ListTile(
+              onTap: () {},
+              title: const Text("Saved articles"),
+            ),
+          ],
+        ),
+      ),
       body: Consumer<GetFeed>(
         builder: (context, value, child) {
           return Center(
