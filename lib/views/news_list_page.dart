@@ -34,6 +34,11 @@ class _NewsListPageState extends State<NewsListPage> {
                   itemCount: value.newsClassList.length,
                   itemBuilder: (context, index) {
                     final classList = value.newsClassList;
+                    if (classList.isEmpty) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
                     return SelectableRegion(
                       focusNode: FocusNode(),
                       selectionControls: DesktopTextSelectionControls(),

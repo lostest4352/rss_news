@@ -63,7 +63,7 @@ class GetFeed with ChangeNotifier {
 
             final imageTags = htmlDoc.getElementsByTagName("img");
 
-            final imageFromTags = imageTags[0].attributes["src"];
+            final imageFromTags = imageTags.firstOrNull?.attributes["src"];
 
             // debugPrint(imageFromTags);
 
