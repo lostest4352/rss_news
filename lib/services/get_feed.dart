@@ -25,9 +25,11 @@ class GetFeed with ChangeNotifier {
             listElement.findElements("title").single.innerText.removeTags();
 
         // Image inside media:content
-        final getMediaEl = listElement.findElements("media:content");
-        final String? innerImageLink =
-            getMediaEl.firstOrNull?.getAttribute("url").toString().removeTags();
+        final getMediaXmlElement = listElement.findElements("media:content");
+        final String? innerImageLink = getMediaXmlElement.firstOrNull
+            ?.getAttribute("url")
+            .toString()
+            .removeTags();
 
         // Link
         final String imageLink =
@@ -44,22 +46,30 @@ class GetFeed with ChangeNotifier {
         final String pubDate =
             listElement.findElements("pubDate").single.innerText;
 
-        String? contentText() {
+        // News content and Image src link from html inside of xml
+        (String?, String?) contentText() {
           try {
             final innerTextVal =
                 listElement.findElements("content:encoded").single.innerText;
 
             final htmlDoc = parse(innerTextVal);
 
-            final pname = htmlDoc.getElementsByTagName("p");
+            final paragraphTagsList = htmlDoc.getElementsByTagName("p");
 
-            final joinedName =
-                pname.fold(pname[0].text, (previousValue, element) {
+            final joinedName = paragraphTagsList.fold(paragraphTagsList[0].text,
+                (previousValue, element) {
               return "$previousValue\n \n ${element.text}";
             });
-            return joinedName.removeTags();
+
+            final imageTags = htmlDoc.getElementsByTagName("img");
+
+            final imageFromTags = imageTags[0].attributes["src"];
+
+            // debugPrint(imageFromTags);
+
+            return (joinedName.removeTags(), imageFromTags);
           } catch (e) {
-            return null;
+            return (null, null);
           }
         }
 
@@ -69,8 +79,8 @@ class GetFeed with ChangeNotifier {
           link: imageLink,
           description: description,
           pubDate: pubDate,
-          content: contentText(),
-          imageLink: imageLink,
+          content: contentText().$1,
+          imageLink: contentText().$2,
           innerImageLink: innerImageLink,
         );
         newsClassList.add(newsClass);
@@ -87,7 +97,8 @@ extension XmlHelper on String {
   String removeTags() {
     final convertedText = HtmlUnescape().convert(this);
     debugPrint("before $convertedText");
-    final decodedText  = convertedText.replaceAll(RegExp(r'â|â|â|â|â'), "'");
+    final decodedText =
+        convertedText.replaceAll(RegExp(r'â|â|â|â|â'), "'");
     debugPrint("after $decodedText");
 
     return decodedText;

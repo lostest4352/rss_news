@@ -42,6 +42,26 @@ class ContentPage extends StatelessWidget {
             const SizedBox(
               height: 5,
             ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Builder(
+                builder: (context) {
+                  final imgLink = newsClass.imageLink;
+                  if (imgLink != null) {
+                    return CachedNetworkImage(
+                      imageUrl: imgLink,
+                      placeholder: (context, url) =>
+                          const CircularProgressIndicator(),
+                      errorWidget: (context, url, error) {
+                        return const Icon(Icons.error);
+                      },
+                    );
+                  } else {
+                    return const Center();
+                  }
+                },
+              ),
+            ),
             SizedBox(
               child: Builder(
                 builder: (context) {

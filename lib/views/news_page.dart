@@ -75,6 +75,28 @@ class _NewsPageState extends State<NewsPage> {
                                 },
                               ),
                             ),
+                            //
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Builder(
+                                builder: (context) {
+                                  final imgLink =
+                                      classList[index].imageLink;
+                                  if (imgLink != null) {
+                                    return CachedNetworkImage(
+                                      imageUrl: imgLink,
+                                      placeholder: (context, url) =>
+                                          const CircularProgressIndicator(),
+                                      errorWidget: (context, url, error) {
+                                        return const Icon(Icons.error);
+                                      },
+                                    );
+                                  } else {
+                                    return const Center();
+                                  }
+                                },
+                              ),
+                            ),
                           ],
                         ),
                       ),
