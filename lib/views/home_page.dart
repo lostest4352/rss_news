@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:that_app/services/get_feed.dart';
-import 'package:that_app/views/news_page.dart';
+import 'package:that_app/views/news_list_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const NewsPage();
+                          return const NewsListPage();
                         },
                       ),
                     );
@@ -46,7 +46,7 @@ class HomePage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const NewsPage();
+                          return const NewsListPage();
                         },
                       ),
                     );
@@ -65,7 +65,7 @@ class HomePage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const NewsPage();
+                          return const NewsListPage();
                         },
                       ),
                     );

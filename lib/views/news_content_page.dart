@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 import 'package:that_app/models/news_class.dart';
 
-class ContentPage extends StatelessWidget {
+class NewsContentPage extends StatelessWidget {
   final NewsClass newsClass;
-  const ContentPage({
+  const NewsContentPage({
     Key? key,
     required this.newsClass,
   }) : super(key: key);

@@ -2,18 +2,18 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:that_app/services/get_feed.dart';
-import 'package:that_app/views/content_page.dart';
+import 'package:that_app/views/news_content_page.dart';
 
-class NewsPage extends StatefulWidget {
-  const NewsPage({
+class NewsListPage extends StatefulWidget {
+  const NewsListPage({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<NewsPage> createState() => _NewsPageState();
+  State<NewsListPage> createState() => _NewsListPageState();
 }
 
-class _NewsPageState extends State<NewsPage> {
+class _NewsListPageState extends State<NewsListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +25,12 @@ class _NewsPageState extends State<NewsPage> {
           return Column(
             children: [
               Expanded(
-                child: ListView.builder(
+                child: ListView.separated(
+                  separatorBuilder: (context, index) {
+                    return const Divider(
+                      thickness: 5,
+                    );
+                  },
                   itemCount: value.newsClassList.length,
                   itemBuilder: (context, index) {
                     final classList = value.newsClassList;
@@ -36,7 +41,8 @@ class _NewsPageState extends State<NewsPage> {
                         onTap: () {
                           Navigator.push(context, MaterialPageRoute(
                             builder: (context) {
-                              return ContentPage(newsClass: classList[index]);
+                              return NewsContentPage(
+                                  newsClass: classList[index]);
                             },
                           ));
                         },
@@ -54,12 +60,12 @@ class _NewsPageState extends State<NewsPage> {
                                 },
                               ),
                             ),
+                            //
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Builder(
                                 builder: (context) {
-                                  final imgLink =
-                                      classList[index].innerImageLink;
+                                  final imgLink = classList[index].imageLink;
                                   if (imgLink != null) {
                                     return CachedNetworkImage(
                                       imageUrl: imgLink,
@@ -75,13 +81,12 @@ class _NewsPageState extends State<NewsPage> {
                                 },
                               ),
                             ),
-                            //
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Builder(
                                 builder: (context) {
                                   final imgLink =
-                                      classList[index].imageLink;
+                                      classList[index].innerImageLink;
                                   if (imgLink != null) {
                                     return CachedNetworkImage(
                                       imageUrl: imgLink,
