@@ -45,23 +45,6 @@ class HomePage extends StatelessWidget {
                 ),
                 ListTile(
                   onTap: () {
-                    value.getData('https://www.onlinekhabar.com/feed');
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return const NewsListPage();
-                        },
-                      ),
-                    );
-                  },
-                  title: const Text("Online Khabar"),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                ListTile(
-                  onTap: () {
                     value.getData(
                       "https://nagariknews.nagariknetwork.com/feed",
                     );
@@ -75,6 +58,23 @@ class HomePage extends StatelessWidget {
                     );
                   },
                   title: const Text("Nagarik News"),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                ListTile(
+                  onTap: () {
+                    value.getData('https://www.onlinekhabar.com/feed');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const NewsListPage();
+                        },
+                      ),
+                    );
+                  },
+                  title: const Text("Online Khabar"),
                 ),
                 const SizedBox(
                   height: 10,

@@ -44,12 +44,15 @@ class _NewsListPageState extends State<NewsListPage> {
                       selectionControls: DesktopTextSelectionControls(),
                       child: InkWell(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(
-                            builder: (context) {
-                              return NewsContentPage(
-                                  newsClass: classList[index]);
-                            },
-                          ));
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return NewsContentPage(
+                                    newsClass: classList[index]);
+                              },
+                            ),
+                          );
                         },
                         child: Column(
                           children: [
