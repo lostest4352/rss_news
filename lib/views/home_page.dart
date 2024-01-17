@@ -52,7 +52,9 @@ class HomePage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const NewsListPage();
+                          return const NewsListPage(
+                            siteTitle: "Nagarik News",
+                          );
                         },
                       ),
                     );
@@ -69,7 +71,9 @@ class HomePage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const NewsListPage();
+                          return const NewsListPage(
+                            siteTitle: "Online Khabar",
+                          );
                         },
                       ),
                     );
@@ -88,7 +92,9 @@ class HomePage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return const NewsListPage();
+                          return const NewsListPage(
+                            siteTitle: "New York Times",
+                          );
                         },
                       ),
                     );
