@@ -54,7 +54,7 @@ class NewsContentPage extends StatelessWidget {
                 uri: Uri.parse(newsClass.link ?? ""),
                 builder: (context, followLink) {
                   return InkWell(
-                    onTap: () {},
+                    onTap: followLink,
                     child: Text(
                       newsClass.link ?? "",
                       style: const TextStyle(color: Colors.blue),
@@ -86,29 +86,27 @@ class NewsContentPage extends StatelessWidget {
                 },
               ),
             ),
-            SizedBox(
-              child: Builder(
-                builder: (context) {
-                  String textToShow = '';
-                  final description = newsClass.description;
-                  final content = newsClass.content;
+            Builder(
+              builder: (context) {
+                String textToShow = '';
+                final description = newsClass.description;
+                final content = newsClass.content;
 
-                  if (content != null) {
-                    textToShow = content;
-                  } else if (content == null && description != null) {
-                    textToShow = description;
-                  } else {
-                    textToShow = '';
-                  }
-                  return ColoredBox(
-                    color: Colors.black45,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SelectableText(textToShow),
-                    ),
-                  );
-                },
-              ),
+                if (content != null) {
+                  textToShow = content;
+                } else if (content == null && description != null) {
+                  textToShow = description;
+                } else {
+                  textToShow = '';
+                }
+                return ColoredBox(
+                  color: Colors.black45,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SelectableText(textToShow),
+                  ),
+                );
+              },
             ),
             Builder(
               builder: (context) {
