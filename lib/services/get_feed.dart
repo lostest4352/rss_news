@@ -28,7 +28,7 @@ class GetFeed with ChangeNotifier {
 
         // Image inside media:content
         final getMediaXmlElement = listElement.findElements("media:content");
-        final String? innerImageLink = getMediaXmlElement.firstOrNull
+        final String? xmlImageLink = getMediaXmlElement.firstOrNull
             ?.getAttribute("url")
             .toString()
             .removeTags();
@@ -55,7 +55,7 @@ class GetFeed with ChangeNotifier {
         // debugPrint(creatorName);
 
         // News content and Image src link from html inside of xml
-        (String?, String?) contentTextFunc() {
+        (String?, String?) contentElementsFunc() {
           try {
             final innerTextVal =
                 listElement.findElements("content:encoded").single.innerText;
@@ -80,7 +80,7 @@ class GetFeed with ChangeNotifier {
           }
         }
 
-        final contentText = contentTextFunc();
+        final contentElements = contentElementsFunc();
 
         //
         final NewsClass newsClass = NewsClass(
@@ -88,9 +88,9 @@ class GetFeed with ChangeNotifier {
           link: siteLink,
           description: description,
           pubDate: pubDate,
-          content: contentText.$1,
-          imageLink: contentText.$2,
-          innerImageLink: innerImageLink,
+          content: contentElements.$1,
+          htmlImageLink: contentElements.$2,
+          xmlImageLink: xmlImageLink,
           creator: creatorName,
         );
         newsClassList.add(newsClass);

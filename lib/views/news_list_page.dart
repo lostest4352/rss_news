@@ -16,7 +16,7 @@ class NewsListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  Text(siteTitle),
+        title: Text(siteTitle),
       ),
       body: Consumer<GetFeed>(
         builder: (context, value, child) {
@@ -71,10 +71,11 @@ class NewsListPage extends StatelessWidget {
                               padding: const EdgeInsets.all(8.0),
                               child: Builder(
                                 builder: (context) {
-                                  final imgLink = classList[index].imageLink;
-                                  if (imgLink != null) {
+                                  final xmlImageLink =
+                                      classList[index].xmlImageLink;
+                                  if (xmlImageLink != null) {
                                     return CachedNetworkImage(
-                                      imageUrl: imgLink,
+                                      imageUrl: xmlImageLink,
                                       placeholder: (context, url) =>
                                           const CircularProgressIndicator(),
                                       errorWidget: (context, url, error) {
@@ -91,11 +92,11 @@ class NewsListPage extends StatelessWidget {
                               padding: const EdgeInsets.all(8.0),
                               child: Builder(
                                 builder: (context) {
-                                  final imgLink =
-                                      classList[index].innerImageLink;
-                                  if (imgLink != null) {
+                                  final htmlImageLink =
+                                      classList[index].htmlImageLink;
+                                  if (htmlImageLink != null) {
                                     return CachedNetworkImage(
-                                      imageUrl: imgLink,
+                                      imageUrl: htmlImageLink,
                                       placeholder: (context, url) =>
                                           const CircularProgressIndicator(),
                                       errorWidget: (context, url, error) {

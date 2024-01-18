@@ -4,8 +4,8 @@ class NewsClass {
   final String? description;
   final String? pubDate;
   final String? content;
-  final String? imageLink;
-  final String? innerImageLink;
+  final String? htmlImageLink;
+  final String? xmlImageLink;
   final String? creator;
 
   NewsClass({
@@ -14,8 +14,8 @@ class NewsClass {
     required this.description,
     required this.pubDate,
     required this.content,
-    required this.imageLink,
-    required this.innerImageLink,
+    required this.htmlImageLink,
+    required this.xmlImageLink,
     this.creator,
   });
 }

@@ -16,7 +16,7 @@ class NewsContentPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          (){
+          () {
             final creator = newsClass.creator;
             if (creator != null) {
               return "From: $creator";
@@ -78,10 +78,10 @@ class NewsContentPage extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Builder(
                 builder: (context) {
-                  final imgLink = newsClass.imageLink;
-                  if (imgLink != null) {
+                  final htmlImageLink = newsClass.htmlImageLink;
+                  if (htmlImageLink != null) {
                     return CachedNetworkImage(
-                      imageUrl: imgLink,
+                      imageUrl: htmlImageLink,
                       placeholder: (context, url) =>
                           const CircularProgressIndicator(),
                       errorWidget: (context, url, error) {
@@ -118,12 +118,12 @@ class NewsContentPage extends StatelessWidget {
             ),
             Builder(
               builder: (context) {
-                final imgLink = newsClass.innerImageLink;
-                if (imgLink != null) {
+                final xmlImageLink = newsClass.xmlImageLink;
+                if (xmlImageLink != null) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CachedNetworkImage(
-                      imageUrl: imgLink,
+                      imageUrl: xmlImageLink,
                       placeholder: (context, url) =>
                           const CircularProgressIndicator(),
                       errorWidget: (context, url, error) {
