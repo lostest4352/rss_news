@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:that_app/models/news_class.dart';
+import 'package:url_launcher/link.dart';
 
 class NewsContentPage extends StatelessWidget {
   final NewsClass newsClass;
@@ -42,6 +43,29 @@ class NewsContentPage extends StatelessWidget {
             const SizedBox(
               height: 5,
             ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8, top: 6),
+              // child: SelectableText(
+              //   newsClass.link ?? "",
+              //   style: const TextStyle(color: Colors.blue),
+              // ),
+              // TODO
+              child: Link(
+                uri: Uri.parse(newsClass.link ?? ""),
+                builder: (context, followLink) {
+                  return InkWell(
+                    onTap: () {},
+                    child: Text(
+                      newsClass.link ?? "",
+                      style: const TextStyle(color: Colors.blue),
+                    ),
+                  );
+                },
+              ),
+            ),
+            // const SizedBox(
+            //   height: 5,
+            // ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Builder(

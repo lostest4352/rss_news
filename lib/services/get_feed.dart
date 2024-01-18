@@ -31,8 +31,8 @@ class GetFeed with ChangeNotifier {
             .toString()
             .removeTags();
 
-        // Link
-        final String imageLink =
+        // Link 
+        final String siteLink =
             listElement.findElements("link").single.innerText.removeTags();
 
         // description
@@ -76,7 +76,7 @@ class GetFeed with ChangeNotifier {
         //
         final NewsClass newsClass = NewsClass(
           title: title,
-          link: imageLink,
+          link: siteLink,
           description: description,
           pubDate: pubDate,
           content: contentText().$1,
