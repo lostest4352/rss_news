@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:http/http.dart' as http;
@@ -31,7 +33,7 @@ class GetFeed with ChangeNotifier {
             .toString()
             .removeTags();
 
-        // Link 
+        // Link
         final String siteLink =
             listElement.findElements("link").single.innerText.removeTags();
 
@@ -47,9 +49,10 @@ class GetFeed with ChangeNotifier {
             listElement.findElements("pubDate").single.innerText;
 
         // dc creator
-        final String creatorName = listElement.findElements("dc:creator").single.innerText;
+        final String creatorName =
+            listElement.findElements("dc:creator").single.innerText;
 
-        debugPrint(creatorName);
+        // debugPrint(creatorName);
 
         // News content and Image src link from html inside of xml
         (String?, String?) contentText() {
@@ -100,14 +103,29 @@ class GetFeed with ChangeNotifier {
 }
 
 extension XmlHelper on String {
-  String removeTags() {
-    final convertedText = HtmlUnescape().convert(this);
-    // debugPrint("before $convertedText");
-    final decodedText =
-        convertedText.replaceAll(RegExp(r'â|â|â|â|â'), "'");
-    // debugPrint("after $decodedText");
+  // String removeTags() {
+  //   final convertedText = HtmlUnescape().convert(this);
+  //   // debugPrint("before $convertedText");
+  //   final decodedText =
+  //       convertedText.replaceAll(RegExp(r'â|â|â|â|â'), "'");
+  //   // debugPrint("after $decodedText");
 
-    return decodedText;
+  //   return decodedText;
+  // }
+
+  String removeTags() {
+    try {
+      final convertedText = HtmlUnescape().convert(this);
+      String output = utf8.decode(
+        latin1.encode(
+          HtmlUnescape().convert(convertedText),
+        ),
+      );
+      return output;
+    } catch (e) {
+      final convertedText = HtmlUnescape().convert(this);
+      return convertedText;
+    }
   }
 }
 
@@ -123,9 +141,9 @@ extension XmlHelper on String {
 // }
 
 // Regex to parse xml
-String htmlEntityDecode(String input) {
-  final text = input.replaceAllMapped(RegExp(r'&#(\d+);'),
-      (match) => String.fromCharCode(int.parse(match.group(1)!)));
-  return text.replaceAllMapped(RegExp(r'&#x([0-9A-Fa-f]+);'),
-      (match) => String.fromCharCode(int.parse(match.group(1)!, radix: 16)));
-}
+// String htmlEntityDecode(String input) {
+//   final text = input.replaceAllMapped(RegExp(r'&#(\d+);'),
+//       (match) => String.fromCharCode(int.parse(match.group(1)!)));
+//   return text.replaceAllMapped(RegExp(r'&#x([0-9A-Fa-f]+);'),
+//       (match) => String.fromCharCode(int.parse(match.group(1)!, radix: 16)));
+// }
