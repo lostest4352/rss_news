@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:that_app/services/get_feed.dart';
 import 'package:that_app/views/news_content_page.dart';
 
-class NewsListPage extends StatefulWidget {
+class NewsListPage extends StatelessWidget {
   final String siteTitle;
   const NewsListPage({
     Key? key,
@@ -13,15 +13,10 @@ class NewsListPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<NewsListPage> createState() => _NewsListPageState();
-}
-
-class _NewsListPageState extends State<NewsListPage> {
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  Text(widget.siteTitle),
+        title:  Text(siteTitle),
       ),
       body: Consumer<GetFeed>(
         builder: (context, value, child) {
