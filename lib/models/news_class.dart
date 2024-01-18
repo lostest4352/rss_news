@@ -6,6 +6,7 @@ class NewsClass {
   final String? content;
   final String? imageLink;
   final String? innerImageLink;
+  final String? creator;
 
   NewsClass({
     required this.title,
@@ -15,5 +16,6 @@ class NewsClass {
     required this.content,
     required this.imageLink,
     required this.innerImageLink,
+    this.creator,
   });
 }

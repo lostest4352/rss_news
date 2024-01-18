@@ -16,7 +16,15 @@ class NewsContentPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          newsClass.title,
+          (){
+            final creator = newsClass.creator;
+            if (creator != null) {
+              return "From: $creator";
+            } else {
+              return newsClass.title;
+            }
+          }(),
+          // newsClass.creator ?? newsClass.title,
           style: const TextStyle(overflow: TextOverflow.fade),
         ),
       ),

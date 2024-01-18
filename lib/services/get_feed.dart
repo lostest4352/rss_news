@@ -46,6 +46,11 @@ class GetFeed with ChangeNotifier {
         final String pubDate =
             listElement.findElements("pubDate").single.innerText;
 
+        // dc creator
+        final String creatorName = listElement.findElements("dc:creator").single.innerText;
+
+        debugPrint(creatorName);
+
         // News content and Image src link from html inside of xml
         (String?, String?) contentText() {
           try {
@@ -82,6 +87,7 @@ class GetFeed with ChangeNotifier {
           content: contentText().$1,
           imageLink: contentText().$2,
           innerImageLink: innerImageLink,
+          creator: creatorName,
         );
         newsClassList.add(newsClass);
         // debugPrint(innerImageLink);
