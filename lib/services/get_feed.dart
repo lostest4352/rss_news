@@ -107,9 +107,7 @@ extension XmlHelper on String {
     final convertedText = HtmlUnescape().convert(this);
     try {
       String output = utf8.decode(
-        latin1.encode(
-          HtmlUnescape().convert(convertedText),
-        ),
+        latin1.encode(convertedText),
       );
       return output;
     } catch (e) {
