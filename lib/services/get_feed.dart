@@ -55,31 +55,32 @@ class GetFeed with ChangeNotifier {
         // debugPrint(creatorName);
 
         // News content and Image src link from html inside of xml
-        (String?, String?) contentText() {
+        (String?, String?) contentTextFunc() {
           try {
             final innerTextVal =
                 listElement.findElements("content:encoded").single.innerText;
 
+            // Inner text is html
             final htmlDoc = parse(innerTextVal);
 
+            // For content inside <p> tags
             final paragraphTagsList = htmlDoc.getElementsByTagName("p");
-
             final joinedName = paragraphTagsList.fold(paragraphTagsList[0].text,
                 (previousValue, element) {
               return "$previousValue\n \n ${element.text}";
-            });
+            }).removeTags();
 
+            // For images
             final imageTags = htmlDoc.getElementsByTagName("img");
-
             final imageFromTags = imageTags.firstOrNull?.attributes["src"];
 
-            // debugPrint(imageFromTags);
-
-            return (joinedName.removeTags(), imageFromTags);
+            return (joinedName, imageFromTags);
           } catch (e) {
             return (null, null);
           }
         }
+
+        final contentText = contentTextFunc();
 
         //
         final NewsClass newsClass = NewsClass(
@@ -87,13 +88,12 @@ class GetFeed with ChangeNotifier {
           link: siteLink,
           description: description,
           pubDate: pubDate,
-          content: contentText().$1,
-          imageLink: contentText().$2,
+          content: contentText.$1,
+          imageLink: contentText.$2,
           innerImageLink: innerImageLink,
           creator: creatorName,
         );
         newsClassList.add(newsClass);
-        // debugPrint(innerImageLink);
         notifyListeners();
       }
     } else {
@@ -114,8 +114,9 @@ extension XmlHelper on String {
       return convertedText;
     }
   }
+}
 
-  // If needed later
+// Saved 3
   // String removeTags() {
   //   final convertedText = HtmlUnescape().convert(this);
   //   // debugPrint("before $convertedText");
@@ -125,9 +126,8 @@ extension XmlHelper on String {
 
   //   return decodedText;
   // }
-}
 
-// Saved
+// Saved 2
 // Regex inside extension
 // RegExp(r'<title>|<\/title>')
 // String removeRegexTags({required String regexElement}) {
@@ -138,6 +138,7 @@ extension XmlHelper on String {
 //   return output;
 // }
 
+// Saved 1
 // Regex to parse xml
 // String htmlEntityDecode(String input) {
 //   final text = input.replaceAllMapped(RegExp(r'&#(\d+);'),
