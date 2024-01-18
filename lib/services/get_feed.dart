@@ -103,6 +103,21 @@ class GetFeed with ChangeNotifier {
 }
 
 extension XmlHelper on String {
+  String removeTags() {
+    final convertedText = HtmlUnescape().convert(this);
+    try {
+      String output = utf8.decode(
+        latin1.encode(
+          HtmlUnescape().convert(convertedText),
+        ),
+      );
+      return output;
+    } catch (e) {
+      return convertedText;
+    }
+  }
+
+  // If needed later
   // String removeTags() {
   //   final convertedText = HtmlUnescape().convert(this);
   //   // debugPrint("before $convertedText");
@@ -112,21 +127,6 @@ extension XmlHelper on String {
 
   //   return decodedText;
   // }
-
-  String removeTags() {
-    try {
-      final convertedText = HtmlUnescape().convert(this);
-      String output = utf8.decode(
-        latin1.encode(
-          HtmlUnescape().convert(convertedText),
-        ),
-      );
-      return output;
-    } catch (e) {
-      final convertedText = HtmlUnescape().convert(this);
-      return convertedText;
-    }
-  }
 }
 
 // Saved
