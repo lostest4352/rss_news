@@ -101,6 +101,29 @@ class HomePage extends StatelessWidget {
                   },
                   title: const Text("New York Times"),
                 ),
+
+                const SizedBox(
+                  height: 10,
+                ),
+                ListTile(
+                  onTap: () {
+                    value.getData(
+                      "https://www.osnepal.com/feed",
+                    );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const NewsListPage(
+                            siteTitle: "OsNepal",
+                          );
+                        },
+                      ),
+                    );
+                  },
+                  title: const Text("OsNepal"),
+                ),
+                // TODO
               ],
             ),
           );
