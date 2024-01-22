@@ -61,7 +61,7 @@ class GetFeed with ChangeNotifier {
           }
         }
 
-        final String description = descriptionFunc().removeTags();
+        final String description = descriptionFunc().removeTags().trim();
 
         // pubDate
         final String pubDate =
@@ -87,7 +87,7 @@ class GetFeed with ChangeNotifier {
             final joinedName = paragraphTagsList.fold("",
                 (previousValue, element) {
               return "$previousValue\n\n${element.text}";
-            }).removeTags();
+            }).removeTags().trim();
 
             // For images
             final imageTags = htmlDoc.getElementsByTagName("img");
