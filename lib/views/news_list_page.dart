@@ -20,6 +20,11 @@ class NewsListPage extends StatelessWidget {
       ),
       body: Consumer<GetFeed>(
         builder: (context, value, child) {
+          if (value.newsClassList.isEmpty) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
           return Column(
             children: [
               Expanded(
@@ -59,7 +64,10 @@ class NewsListPage extends StatelessWidget {
                               subtitle: Builder(
                                 builder: (context) {
                                   if (classList[index].description != null) {
-                                    return Text(classList[index].description!, maxLines: 4,);
+                                    return Text(
+                                      classList[index].description!,
+                                      maxLines: 4,
+                                    );
                                   } else {
                                     return const Center();
                                   }
