@@ -57,7 +57,7 @@ class NewsContentPage extends StatelessWidget {
               //   newsClass.link ?? "",
               //   style: const TextStyle(color: Colors.blue),
               // ),
-              // TODO
+              // TODO android
               child: Link(
                 uri: Uri.parse(newsClass.link ?? ""),
                 builder: (context, followLink) {

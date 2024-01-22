@@ -37,12 +37,31 @@ class GetFeed with ChangeNotifier {
         final String siteLink =
             listElement.findElements("link").single.innerText.removeTags();
 
-        // description
-        final String description = listElement
-            .findElements("description")
-            .single
-            .innerText
-            .removeTags();
+        // description old
+        // final String description = listElement
+        //     .findElements("description")
+        //     .single
+        //     .innerText
+        //     .removeTags();
+
+        // description function
+        String descriptionFunc() {
+          final String description =
+              listElement.findElements("description").single.innerText;
+
+          try {
+            final htmltext = parse(description);
+
+            final text = htmltext.body?.text;
+            // debugPrint(text);
+            return text ?? "null";
+          } catch (e) {
+            debugPrint("not parsed");
+            return description;
+          }
+        }
+
+        final String description = descriptionFunc().removeTags();
 
         // pubDate
         final String pubDate =

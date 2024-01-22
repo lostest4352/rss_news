@@ -59,7 +59,7 @@ class NewsListPage extends StatelessWidget {
                               subtitle: Builder(
                                 builder: (context) {
                                   if (classList[index].description != null) {
-                                    return Text(classList[index].description!);
+                                    return Text(classList[index].description!, maxLines: 4,);
                                   } else {
                                     return const Center();
                                   }

@@ -80,6 +80,50 @@ class HomePage extends StatelessWidget {
                   },
                   title: const Text("Online Khabar"),
                 ),
+
+                //
+                const SizedBox(
+                  height: 10,
+                ),
+                ListTile(
+                  onTap: () {
+                    value.getData(
+                      "https://www.newsofnepal.com/feed/",
+                    );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const NewsListPage(
+                            siteTitle: "Nepal Samacharpatra",
+                          );
+                        },
+                      ),
+                    );
+                  },
+                  title: const Text("Nepal Samacharpatra"),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                ListTile(
+                  onTap: () {
+                    value.getData(
+                      "https://rajdhanidaily.com/feed/",
+                    );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const NewsListPage(
+                            siteTitle: "Rajdhani Daily",
+                          );
+                        },
+                      ),
+                    );
+                  },
+                  title: const Text("Rajdhani Daily"),
+                ),
                 const SizedBox(
                   height: 10,
                 ),
@@ -101,7 +145,6 @@ class HomePage extends StatelessWidget {
                   },
                   title: const Text("New York Times"),
                 ),
-
                 const SizedBox(
                   height: 10,
                 ),
@@ -123,7 +166,6 @@ class HomePage extends StatelessWidget {
                   },
                   title: const Text("OsNepal"),
                 ),
-                // TODO
               ],
             ),
           );
