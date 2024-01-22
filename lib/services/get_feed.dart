@@ -84,7 +84,7 @@ class GetFeed with ChangeNotifier {
 
             // For content inside <p> tags
             final paragraphTagsList = htmlDoc.getElementsByTagName("p");
-            final joinedName = paragraphTagsList.fold(paragraphTagsList[0].text,
+            final joinedName = paragraphTagsList.fold("",
                 (previousValue, element) {
               return "$previousValue\n \n ${element.text}";
             }).removeTags();
