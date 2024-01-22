@@ -86,7 +86,7 @@ class GetFeed with ChangeNotifier {
             final paragraphTagsList = htmlDoc.getElementsByTagName("p");
             final joinedName = paragraphTagsList.fold("",
                 (previousValue, element) {
-              return "$previousValue\n \n ${element.text}";
+              return "$previousValue\n\n${element.text}";
             }).removeTags();
 
             // For images
