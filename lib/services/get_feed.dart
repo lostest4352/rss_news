@@ -44,7 +44,7 @@ class GetFeed with ChangeNotifier {
         //     .innerText
         //     .removeTags();
 
-        // description function
+        // description function. some descriptions were just text but some were inside html so used a function and inside try catch
         String descriptionFunc() {
           final String description =
               listElement.findElements("description").single.innerText;
@@ -122,6 +122,7 @@ class GetFeed with ChangeNotifier {
 }
 
 extension XmlHelper on String {
+  // latin1 encode and utf8 decode fails to return nepali language code but it is necessary for some english rss like new york times. So used try catch
   String removeTags() {
     final convertedText = HtmlUnescape().convert(this);
     try {
