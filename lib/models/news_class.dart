@@ -16,6 +16,6 @@ class NewsClass {
     required this.content,
     required this.htmlImageLink,
     required this.xmlImageLink,
-    this.creator,
+    required this.creator,
   });
 }

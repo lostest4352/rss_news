@@ -54,7 +54,7 @@ class GetFeed with ChangeNotifier {
 
             final text = htmltext.body?.text;
             // debugPrint(text);
-            return text ?? "null";
+            return text ?? "";
           } catch (e) {
             debugPrint("not parsed");
             return description;
