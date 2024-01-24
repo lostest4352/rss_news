@@ -95,13 +95,13 @@ class HomePage extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) {
                           return const NewsListPage(
-                            siteTitle: "Nepal Samacharpatra",
+                            siteTitle: "News Of Nepal",
                           );
                         },
                       ),
                     );
                   },
-                  title: const Text("Nepal Samacharpatra"),
+                  title: const Text("News Of Nepal"),
                 ),
                 const SizedBox(
                   height: 10,
