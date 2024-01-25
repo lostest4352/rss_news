@@ -24,7 +24,7 @@ class GetFeed with ChangeNotifier {
       for (final listElement in itemListFromXml.toList()) {
         // Title
         final title =
-            listElement.findElements("title").single.innerText.removeTags();
+            listElement.findElements("title").first.innerText.removeTags();
 
         // Image inside media:content
         final getMediaXmlElement = listElement.findElements("media:content");
@@ -34,8 +34,11 @@ class GetFeed with ChangeNotifier {
             .removeTags();
 
         // Link
-        final String siteLink =
-            listElement.findElements("link").single.innerText.removeTags();
+        final String? siteLink = listElement
+            .findElements("link")
+            .firstOrNull
+            ?.innerText
+            .removeTags();
 
         // description old
         // final String description = listElement
@@ -47,7 +50,7 @@ class GetFeed with ChangeNotifier {
         // description function. some descriptions were just text but some were inside html so used a function and inside try catch
         String descriptionFunc() {
           final String description =
-              listElement.findElements("description").single.innerText;
+              listElement.findElements("description").first.innerText;
 
           try {
             final htmltext = parse(description);
@@ -64,30 +67,34 @@ class GetFeed with ChangeNotifier {
         final String description = descriptionFunc().removeTags().trim();
 
         // pubDate
-        final String pubDate =
-            listElement.findElements("pubDate").single.innerText;
+        final String? pubDate =
+            listElement.findElements("pubDate").firstOrNull?.innerText;
 
         // dc creator
-        final String creatorName =
-            listElement.findElements("dc:creator").single.innerText;
+        final String? creatorName =
+            listElement.findElements("dc:creator").firstOrNull?.innerText;
 
         // debugPrint(creatorName);
 
         // News content and Image src link from html inside of xml
         (String?, String?) contentElementsFunc() {
           try {
-            final innerTextVal =
-                listElement.findElements("content:encoded").single.innerText;
+            final innerTextVal = listElement
+                .findElements("content:encoded")
+                .firstOrNull
+                ?.innerText;
 
             // Inner text is html
             final htmlDoc = parse(innerTextVal);
 
             // For content inside <p> tags
             final paragraphTagsList = htmlDoc.getElementsByTagName("p");
-            final joinedName = paragraphTagsList.fold("",
-                (previousValue, element) {
-              return "$previousValue\n\n${element.text}";
-            }).removeTags().trim();
+            final joinedName = paragraphTagsList
+                .fold("", (previousValue, element) {
+                  return "$previousValue\n\n${element.text}";
+                })
+                .removeTags()
+                .trim();
 
             // For images
             final imageTags = htmlDoc.getElementsByTagName("img");
