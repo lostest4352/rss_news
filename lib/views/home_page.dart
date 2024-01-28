@@ -151,6 +151,27 @@ class HomePage extends StatelessWidget {
                 ListTile(
                   onTap: () {
                     value.getData(
+                      "https://rss.nytimes.com/services/xml/rss/nyt/Science.xml",
+                    );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const NewsListPage(
+                            siteTitle: "NYTimes Science",
+                          );
+                        },
+                      ),
+                    );
+                  },
+                  title: const Text("NYTimes Science"),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                ListTile(
+                  onTap: () {
+                    value.getData(
                       "https://www.osnepal.com/feed",
                     );
                     Navigator.push(
