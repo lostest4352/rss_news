@@ -16,7 +16,7 @@ class SavedArticles extends Table {
 }
 
 @DriftDatabase(tables: [SavedArticles])
-class AppDatabase extends _$AppDatabase {
+class AppDatabase extends _$AppDatabase with ChangeNotifier {
   AppDatabase() : super(_openConnection());
 
   @override
@@ -33,7 +33,9 @@ class AppDatabase extends _$AppDatabase {
   }
 
   Future<int> addArticle(SavedArticlesCompanion entry) {
-    return into(savedArticles).insert(entry);
+    final addEntry = into(savedArticles).insert(entry);
+    notifyListeners();
+    return addEntry;
   }
 
   // upsert
@@ -42,8 +44,10 @@ class AppDatabase extends _$AppDatabase {
   }
 
   Future<int> deleteArticle(int articleId) {
-    return (delete(savedArticles)..where((tbl) => tbl.id.equals(articleId)))
-        .go();
+    final deleteEntry =
+        (delete(savedArticles)..where((tbl) => tbl.id.equals(articleId))).go();
+    notifyListeners();
+    return deleteEntry;
   }
 }
 
@@ -67,7 +71,7 @@ class NewsClassConverter extends TypeConverter<NewsClass, String> {
 
   @override
   NewsClass fromSql(String fromDb) {
-    debugPrint(" here is $fromDb");
+    // debugPrint(" here is $fromDb");
     return NewsClass.fromMap(json.decode(fromDb) as Map<String, dynamic>);
   }
 

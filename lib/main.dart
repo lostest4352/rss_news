@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
             return GetFeed();
           },
         ),
-        Provider<AppDatabase>(
+        ChangeNotifierProvider<AppDatabase>(
           create: (context) {
             return AppDatabase();
           },

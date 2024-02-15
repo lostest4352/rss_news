@@ -22,12 +22,12 @@ class OfflineArticlesPage extends StatelessWidget {
               child: Text("No articles saved"),
             );
           }
-          // TODO
 
           return Column(
             children: [
               Expanded(
                 child: ListView.separated(
+                  reverse: true,
                   separatorBuilder: (context, index) {
                     return const Divider(
                       thickness: 5,
