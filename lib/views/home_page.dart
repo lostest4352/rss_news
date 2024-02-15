@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:that_app/services/get_feed.dart';
+import 'package:that_app/notifiers/get_feed.dart';
 import 'package:that_app/views/news_list_page.dart';
 
 class HomePage extends StatelessWidget {

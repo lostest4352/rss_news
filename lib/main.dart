@@ -1,5 +1,5 @@
 import 'package:provider/provider.dart';
-import 'package:that_app/services/get_feed.dart';
+import 'package:that_app/notifiers/get_feed.dart';
 import 'package:that_app/views/home_page.dart';
 import 'package:flutter/material.dart';
 

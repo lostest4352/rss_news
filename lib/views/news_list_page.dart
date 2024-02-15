@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:that_app/services/get_feed.dart';
+import 'package:that_app/notifiers/get_feed.dart';
 import 'package:that_app/views/news_content_page.dart';
 
 class NewsListPage extends StatelessWidget {
