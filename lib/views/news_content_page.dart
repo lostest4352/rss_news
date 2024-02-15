@@ -27,6 +27,24 @@ class NewsContentPage extends StatelessWidget {
           // newsClass.creator ?? newsClass.title,
           style: const TextStyle(overflow: TextOverflow.fade),
         ),
+        actions: [
+          PopupMenuButton(
+            itemBuilder: (context) {
+              return [
+                PopupMenuItem(
+                    child: Row(
+                  children: [
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.star),
+                    ),
+                    Text("Saved"),
+                  ],
+                ))
+              ];
+            },
+          ),
+        ],
       ),
       body: Center(
         child: ListView(
