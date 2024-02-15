@@ -32,15 +32,17 @@ class NewsContentPage extends StatelessWidget {
             itemBuilder: (context) {
               return [
                 PopupMenuItem(
-                    child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.star),
+                  value: 'Saved',
+                  child: InkWell(
+                    onTap: () {},
+                    child: const Row(
+                      children: [
+                        Icon(Icons.bookmark),
+                        Text("Saved"),
+                      ],
                     ),
-                    Text("Saved"),
-                  ],
-                ))
+                  ),
+                ),
               ];
             },
           ),
