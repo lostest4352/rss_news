@@ -28,7 +28,10 @@ class AppDatabase extends _$AppDatabase with ChangeNotifier {
   }
 
   Stream<List<SavedArticle>> getDataStream() async* {
-    final allArticles = select(savedArticles).watch();
+    final allArticles = (select(savedArticles)
+          ..orderBy(
+              [(t) => OrderingTerm(expression: t.id, mode: OrderingMode.desc)]))
+        .watch();
     yield* allArticles;
   }
 

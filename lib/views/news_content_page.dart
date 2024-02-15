@@ -55,6 +55,7 @@ class NewsContentPage extends StatelessWidget {
                                 );
                           }
                         }
+                        Navigator.pop(context);
                       },
                       child: Row(
                         children: [

@@ -27,7 +27,6 @@ class OfflineArticlesPage extends StatelessWidget {
             children: [
               Expanded(
                 child: ListView.separated(
-                  reverse: true,
                   separatorBuilder: (context, index) {
                     return const Divider(
                       thickness: 5,
