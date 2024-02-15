@@ -26,9 +26,9 @@ class MyApp extends StatelessWidget {
             return AppDatabase();
           },
         ),
-        FutureProvider(
+        StreamProvider<List<SavedArticle>?>(
           create: (context) {
-            return context.read<AppDatabase>().getData();
+            return context.read<AppDatabase>().getDataStream();
           },
           initialData: null,
         ),

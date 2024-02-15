@@ -27,6 +27,11 @@ class AppDatabase extends _$AppDatabase {
     return allArticles;
   }
 
+  Stream<List<SavedArticle>> getDataStream() async* {
+    final allArticles = select(savedArticles).watch();
+    yield* allArticles;
+  }
+
   Future<int> addArticle(SavedArticlesCompanion entry) {
     return into(savedArticles).insert(entry);
   }
