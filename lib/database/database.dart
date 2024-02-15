@@ -62,11 +62,13 @@ class NewsClassConverter extends TypeConverter<NewsClass, String> {
 
   @override
   NewsClass fromSql(String fromDb) {
-    return NewsClass.fromJson(fromDb);
+    debugPrint(" here is $fromDb");
+    return NewsClass.fromMap(json.decode(fromDb) as Map<String, dynamic>);
   }
 
   @override
   String toSql(NewsClass value) {
-    return json.encode(value.toJson());
+    return json.encode(value.toMap());
+    // return value.toJson();
   }
 }
