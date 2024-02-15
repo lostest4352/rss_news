@@ -16,7 +16,7 @@ class SavedArticles extends Table {
 }
 
 @DriftDatabase(tables: [SavedArticles])
-class AppDatabase extends _$AppDatabase with ChangeNotifier {
+class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
@@ -37,7 +37,6 @@ class AppDatabase extends _$AppDatabase with ChangeNotifier {
 
   Future<int> addArticle(SavedArticlesCompanion entry) {
     final addEntry = into(savedArticles).insert(entry);
-    notifyListeners();
     return addEntry;
   }
 
@@ -49,7 +48,6 @@ class AppDatabase extends _$AppDatabase with ChangeNotifier {
   Future<int> deleteArticle(int articleId) {
     final deleteEntry =
         (delete(savedArticles)..where((tbl) => tbl.id.equals(articleId))).go();
-    notifyListeners();
     return deleteEntry;
   }
 }
