@@ -26,6 +26,12 @@ class MyApp extends StatelessWidget {
             return AppDatabase();
           },
         ),
+        FutureProvider<List<SavedArticle>?>(
+          create: (context) {
+            return context.read<AppDatabase>().getData();
+          },
+          initialData: null,
+        ),
       ],
       builder: (context, snapshot) {
         return MaterialApp(
