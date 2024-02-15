@@ -21,6 +21,25 @@ class AppDatabase extends _$AppDatabase {
 
   @override
   int get schemaVersion => 1;
+
+  Future<List<SavedArticle>> getData() async {
+    List<SavedArticle> allArticles = await select(savedArticles).get();
+    return allArticles;
+  }
+
+  Future<int> addArticle(SavedArticlesCompanion entry) {
+    return into(savedArticles).insert(entry);
+  }
+
+  // upsert
+  Future<int> createOrUpdateArticle(SavedArticle article) {
+    return into(savedArticles).insertOnConflictUpdate(article);
+  }
+
+  Future<int> deleteArticle(int articleId) {
+    return (delete(savedArticles)..where((tbl) => tbl.id.equals(articleId)))
+        .go();
+  }
 }
 
 LazyDatabase _openConnection() {

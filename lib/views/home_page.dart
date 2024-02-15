@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:that_app/notifiers/get_feed.dart';
+import 'package:that_app/views/appdrawer.dart';
 import 'package:that_app/views/news_list_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -12,29 +13,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("News App"),
       ),
-      drawer: Drawer(
-        child: Column(
-          children: [
-            const DrawerHeader(
-              child: Column(
-                children: [
-                  Spacer(),
-                  Text("News App"),
-                  Spacer(),
-                ],
-              ),
-            ),
-            ListTile(
-              onTap: () {},
-              title: const Text("Home Page"),
-            ),
-            ListTile(
-              onTap: () {},
-              title: const Text("Saved articles"),
-            ),
-          ],
-        ),
-      ),
+      drawer: const AppDrawer(),
       body: Consumer<GetFeed>(
         builder: (context, value, child) {
           return Center(
