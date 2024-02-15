@@ -16,8 +16,8 @@ class OfflineArticlesPage extends StatelessWidget {
       ),
       drawer: const AppDrawer(),
       body: Consumer<List<SavedArticle>?>(
-        builder: (context, value, child) {
-          if (value == null || value.isEmpty) {
+        builder: (context, classList, child) {
+          if (classList == null || classList.isEmpty) {
             return const Center(
               child: Text("No articles saved"),
             );
@@ -32,9 +32,8 @@ class OfflineArticlesPage extends StatelessWidget {
                       thickness: 5,
                     );
                   },
-                  itemCount: value.length,
+                  itemCount: classList.length,
                   itemBuilder: (context, index) {
-                    final classList = value;
                     return SelectableRegion(
                       focusNode: FocusNode(),
                       selectionControls: DesktopTextSelectionControls(),
@@ -45,7 +44,8 @@ class OfflineArticlesPage extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (context) {
                                 return NewsContentPage(
-                                    newsClass: classList[index].newsClass);
+                                  newsClass: classList[index].newsClass,
+                                );
                               },
                             ),
                           );
