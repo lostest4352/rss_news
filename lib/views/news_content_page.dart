@@ -37,7 +37,7 @@ class NewsContentPage extends StatelessWidget {
                     onTap: () {},
                     child: const Row(
                       children: [
-                        Icon(Icons.bookmark),
+                        Icon(Icons.bookmark_outline),
                         Text("Saved"),
                       ],
                     ),
