@@ -22,7 +22,7 @@ class NewsContentPage extends StatelessWidget {
 
       return Scaffold(
         appBar: AppBar(
-          title: SelectableText(
+          title: Text(
             () {
               final creator = newsClass.creator;
               if (creator != null) {
@@ -90,7 +90,7 @@ class NewsContentPage extends StatelessWidget {
                 child: Wrap(
                   alignment: WrapAlignment.center,
                   children: [
-                    Text(
+                    SelectableText(
                       newsClass.title,
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 22),
