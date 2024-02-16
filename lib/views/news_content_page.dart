@@ -39,41 +39,37 @@ class NewsContentPage extends StatelessWidget {
               itemBuilder: (context) {
                 return [
                   PopupMenuItem(
-                    value: 'Saved',
-                    child: InkWell(
-                      onTap: () {
-                        if (selectedVal != null) {
-                          if (selectedVal.isEmpty) {
-                            context.read<AppDatabase>().addArticle(
-                                  SavedArticlesCompanion.insert(
-                                    newsClass: newsClass,
-                                  ),
-                                );
-                          } else {
-                            context.read<AppDatabase>().deleteArticle(
-                                  selectedVal.first.id,
-                                );
-                          }
+                    // value: 'Saved',
+                    onTap: () {
+                      if (selectedVal != null) {
+                        if (selectedVal.isEmpty) {
+                          context.read<AppDatabase>().addArticle(
+                                SavedArticlesCompanion.insert(
+                                  newsClass: newsClass,
+                                ),
+                              );
+                        } else {
+                          context
+                              .read<AppDatabase>()
+                              .deleteArticle(selectedVal.first.id);
                         }
-                        Navigator.pop(context);
-                      },
-                      child: Row(
-                        children: [
-                          Builder(
-                            builder: (context) {
-                              if (selectedVal == null) {
-                                return const Icon(Icons.bookmark_outline);
-                              } else if (selectedVal.isEmpty) {
-                                return const Icon(Icons.bookmark_outline);
-                              } else {
-                                return const Icon(Icons.bookmark);
-                              }
-                            },
-                          ),
-                          // Icon(Icons.bookmark_outline),
-                          const Text("Saved"),
-                        ],
-                      ),
+                      }
+                    },
+                    child: Row(
+                      children: [
+                        Builder(
+                          builder: (context) {
+                            if (selectedVal == null) {
+                              return const Icon(Icons.bookmark_outline);
+                            } else if (selectedVal.isEmpty) {
+                              return const Icon(Icons.bookmark_outline);
+                            } else {
+                              return const Icon(Icons.bookmark);
+                            }
+                          },
+                        ),
+                        const Text("Saved"),
+                      ],
                     ),
                   ),
                 ];
