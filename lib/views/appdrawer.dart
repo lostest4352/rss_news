@@ -45,7 +45,7 @@ class AppDrawer extends StatelessWidget {
                 ),
               );
             },
-            title: const Text("Saved articles"),
+            title: const Text("Saved Articles"),
           ),
         ],
       ),
