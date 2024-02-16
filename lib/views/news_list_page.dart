@@ -47,7 +47,9 @@ class NewsListPage extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (context) {
                                 return NewsContentPage(
-                                    newsClass: classList[index]);
+                                  newsClass: classList[index],
+                                  classList: null,
+                                );
                               },
                             ),
                           );

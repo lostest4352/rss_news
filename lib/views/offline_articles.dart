@@ -45,6 +45,7 @@ class OfflineArticlesPage extends StatelessWidget {
                               builder: (context) {
                                 return NewsContentPage(
                                   newsClass: classList[index].newsClass,
+                                  classList: classList,
                                 );
                               },
                             ),
