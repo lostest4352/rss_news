@@ -16,8 +16,8 @@ class OfflineArticlesPage extends StatelessWidget {
       ),
       drawer: const AppDrawer(),
       body: Consumer<List<SavedArticle>?>(
-        builder: (context, classList, child) {
-          if (classList == null || classList.isEmpty) {
+        builder: (context, articlesList, child) {
+          if (articlesList == null || articlesList.isEmpty) {
             return const Center(
               child: Text("No articles saved"),
             );
@@ -26,7 +26,7 @@ class OfflineArticlesPage extends StatelessWidget {
           List<SavedArticle> selectedSavedArticles = [];
 
           ValueNotifier<List<bool>> tileValues =
-              ValueNotifier(List.filled(classList.length, false));
+              ValueNotifier(List.filled(articlesList.length, false));
 
           return ListenableBuilder(
             listenable: tileValues,
@@ -64,13 +64,14 @@ class OfflineArticlesPage extends StatelessWidget {
                                   }(),
                                   onChanged: (value) {
                                     if ((tileValues.value.contains(false))) {
-                                      tileValues.value =
-                                          List.filled(classList.length, true);
+                                      tileValues.value = List.filled(
+                                          articlesList.length, true);
                                       // Add all
-                                      selectedSavedArticles.addAll(classList);
+                                      selectedSavedArticles
+                                          .addAll(articlesList);
                                     } else {
-                                      tileValues.value =
-                                          List.filled(classList.length, false);
+                                      tileValues.value = List.filled(
+                                          articlesList.length, false);
                                       // Remove all
                                       selectedSavedArticles = [];
                                     }
@@ -164,7 +165,7 @@ class OfflineArticlesPage extends StatelessWidget {
                           thickness: 5,
                         );
                       },
-                      itemCount: classList.length,
+                      itemCount: articlesList.length,
                       itemBuilder: (context, index) {
                         return SelectableRegion(
                           focusNode: FocusNode(),
@@ -178,14 +179,15 @@ class OfflineArticlesPage extends StatelessWidget {
 
                               // Add or remove item
                               if (selectedSavedArticles
-                                  .contains(classList[index])) {
+                                  .contains(articlesList[index])) {
                                 return;
                               } else {
                                 if (tileValues.value[index] == true) {
-                                  selectedSavedArticles.add(classList[index]);
+                                  selectedSavedArticles
+                                      .add(articlesList[index]);
                                 } else {
                                   selectedSavedArticles
-                                      .remove(classList[index]);
+                                      .remove(articlesList[index]);
                                 }
                               }
                             },
@@ -198,14 +200,15 @@ class OfflineArticlesPage extends StatelessWidget {
 
                                 // Add or remove item
                                 if (selectedSavedArticles
-                                    .contains(classList[index])) {
+                                    .contains(articlesList[index])) {
                                   return;
                                 } else {
                                   if (tileValues.value[index] == true) {
-                                    selectedSavedArticles.add(classList[index]);
+                                    selectedSavedArticles
+                                        .add(articlesList[index]);
                                   } else {
                                     selectedSavedArticles
-                                        .remove(classList[index]);
+                                        .remove(articlesList[index]);
                                   }
                                 }
                               } else {
@@ -214,7 +217,8 @@ class OfflineArticlesPage extends StatelessWidget {
                                   MaterialPageRoute(
                                     builder: (context) {
                                       return NewsContentPage(
-                                        newsClass: classList[index].newsClass,
+                                        newsClass:
+                                            articlesList[index].newsClass,
                                       );
                                     },
                                   ),
@@ -229,16 +233,16 @@ class OfflineArticlesPage extends StatelessWidget {
                                 children: [
                                   ListTile(
                                     selected: tileValues.value[index],
-                                    title:
-                                        Text(classList[index].newsClass.title),
+                                    title: Text(
+                                        articlesList[index].newsClass.title),
                                     subtitle: Builder(
                                       builder: (context) {
-                                        if (classList[index]
+                                        if (articlesList[index]
                                                 .newsClass
                                                 .description !=
                                             null) {
                                           return Text(
-                                            classList[index]
+                                            articlesList[index]
                                                 .newsClass
                                                 .description!,
                                             maxLines: 4,
@@ -254,7 +258,7 @@ class OfflineArticlesPage extends StatelessWidget {
                                     padding: const EdgeInsets.all(8.0),
                                     child: Builder(
                                       builder: (context) {
-                                        final xmlImageLink = classList[index]
+                                        final xmlImageLink = articlesList[index]
                                             .newsClass
                                             .xmlImageLink;
                                         if (xmlImageLink != null) {
@@ -276,9 +280,10 @@ class OfflineArticlesPage extends StatelessWidget {
                                     padding: const EdgeInsets.all(8.0),
                                     child: Builder(
                                       builder: (context) {
-                                        final htmlImageLink = classList[index]
-                                            .newsClass
-                                            .htmlImageLink;
+                                        final htmlImageLink =
+                                            articlesList[index]
+                                                .newsClass
+                                                .htmlImageLink;
                                         if (htmlImageLink != null) {
                                           return CachedNetworkImage(
                                             imageUrl: htmlImageLink,
