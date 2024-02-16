@@ -68,7 +68,15 @@ class NewsContentPage extends StatelessWidget {
                             }
                           },
                         ),
-                        const Text("Saved"),
+                        Builder(builder: (context) {
+                          if (selectedVal == null) {
+                            return const Text("Save");
+                          } else if (selectedVal.isEmpty) {
+                            return const Text("Save");
+                          } else {
+                            return const Text("Saved");
+                          }
+                        }),
                       ],
                     ),
                   ),

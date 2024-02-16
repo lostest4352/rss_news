@@ -8,7 +8,6 @@ import 'package:that_app/views/news_content_page.dart';
 class OfflineArticlesPage extends StatelessWidget {
   const OfflineArticlesPage({super.key});
 
-  // bool boolVal = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -172,8 +171,6 @@ class OfflineArticlesPage extends StatelessWidget {
                           selectionControls: DesktopTextSelectionControls(),
                           child: InkWell(
                             onLongPress: () {
-                              // boolVal = !boolVal;
-                              // setState(() {});
                               tileValues.value[index] =
                                   !tileValues.value[index];
                               // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
