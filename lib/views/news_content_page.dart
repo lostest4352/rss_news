@@ -83,6 +83,7 @@ class NewsContentPage extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
+
               Container(
                 color: Colors.black26,
                 padding: const EdgeInsets.all(8),
@@ -97,9 +98,20 @@ class NewsContentPage extends StatelessWidget {
                   ],
                 ),
               ),
+              Container(
+                color: Colors.black,
+                padding: const EdgeInsets.only(left: 8),
+                child: Builder(builder: (context) {
+                  final pubDate = newsClass.pubDate ?? '        ';
+                  final formattedDate =
+                      pubDate.substring(0, (pubDate.length - 6)).trim();
+                  return SelectableText(formattedDate);
+                }),
+              ),
               const SizedBox(
                 height: 5,
               ),
+
               Padding(
                 padding: const EdgeInsets.only(left: 8, top: 6),
                 // child: SelectableText(
