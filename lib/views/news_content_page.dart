@@ -22,7 +22,7 @@ class NewsContentPage extends StatelessWidget {
 
       return Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: SelectableText(
             () {
               final creator = newsClass.creator;
               if (creator != null) {
