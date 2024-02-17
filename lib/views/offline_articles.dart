@@ -64,6 +64,7 @@ class OfflineArticlesPage extends StatelessWidget {
                                   }(),
                                   onChanged: (value) {
                                     if ((tileValues.value.contains(false))) {
+                                      // TODO add to the notifier
                                       tileValues.value = List.filled(
                                           articlesList.length, true);
                                       // Add all
@@ -115,8 +116,8 @@ class OfflineArticlesPage extends StatelessWidget {
                                                               .read<
                                                                   AppDatabase>()
                                                               .deleteArticle(
-                                                                  savedArticle
-                                                                      .id);
+                                                                savedArticle.id,
+                                                              );
                                                         }
 
                                                         Navigator.pop(context);
@@ -177,18 +178,11 @@ class OfflineArticlesPage extends StatelessWidget {
                               // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
                               tileValues.notifyListeners();
 
-                              // Add or remove item
-                              if (selectedSavedArticles
-                                  .contains(articlesList[index])) {
-                                return;
+                              if (tileValues.value[index] == true) {
+                                selectedSavedArticles.add(articlesList[index]);
                               } else {
-                                if (tileValues.value[index] == true) {
-                                  selectedSavedArticles
-                                      .add(articlesList[index]);
-                                } else {
-                                  selectedSavedArticles
-                                      .remove(articlesList[index]);
-                                }
+                                selectedSavedArticles
+                                    .remove(articlesList[index]);
                               }
                             },
                             onTap: () {
@@ -199,17 +193,13 @@ class OfflineArticlesPage extends StatelessWidget {
                                 tileValues.notifyListeners();
 
                                 // Add or remove item
-                                if (selectedSavedArticles
-                                    .contains(articlesList[index])) {
-                                  return;
+
+                                if (tileValues.value[index] == true) {
+                                  selectedSavedArticles
+                                      .add(articlesList[index]);
                                 } else {
-                                  if (tileValues.value[index] == true) {
-                                    selectedSavedArticles
-                                        .add(articlesList[index]);
-                                  } else {
-                                    selectedSavedArticles
-                                        .remove(articlesList[index]);
-                                  }
+                                  selectedSavedArticles
+                                      .remove(articlesList[index]);
                                 }
                               } else {
                                 Navigator.push(

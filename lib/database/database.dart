@@ -40,7 +40,7 @@ class AppDatabase extends _$AppDatabase {
     return addEntry;
   }
 
-  // upsert
+  //
   Future<int> createOrUpdateArticle(SavedArticle article) {
     return into(savedArticles).insertOnConflictUpdate(article);
   }
