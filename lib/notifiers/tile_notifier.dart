@@ -38,6 +38,7 @@ class TileNotifier with ChangeNotifier {
       // Add all articles
       selectedSavedArticles.addAll(articlesList!);
     }
+    notifyListeners();
   }
 
   void removeAllArticles() {
@@ -47,5 +48,6 @@ class TileNotifier with ChangeNotifier {
       // Remove all articles
       selectedSavedArticles = [];
     }
+    notifyListeners();
   }
 }

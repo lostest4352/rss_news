@@ -67,7 +67,7 @@ class OfflineArticlesPage extends StatelessWidget {
                                       return true;
                                     }
                                   }(),
-                                  onChanged: (value) {
+                                  onChanged: (_) {
                                     if ((tileNotifier.tileValues
                                         .contains(false))) {
                                       tileNotifier.addAllArticles();
