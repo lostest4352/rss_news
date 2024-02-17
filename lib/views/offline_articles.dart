@@ -194,7 +194,7 @@ class OfflineArticlesPage extends StatelessWidget {
                             child: Container(
                               color: (tileNotifier.tileValues[index] == false)
                                   ? Colors.black45
-                                  : Colors.blueGrey[900],
+                                  : Colors.blueGrey[800],
                               child: Column(
                                 children: [
                                   ListTile(
