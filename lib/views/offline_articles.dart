@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:that_app/database/database.dart';
+import 'package:that_app/notifiers/tile_notifier.dart';
 import 'package:that_app/views/appdrawer.dart';
 import 'package:that_app/views/news_content_page.dart';
 
@@ -23,20 +24,23 @@ class OfflineArticlesPage extends StatelessWidget {
             );
           }
 
-          List<SavedArticle> selectedSavedArticles = [];
+          final TileNotifier tileNotifier =
+              TileNotifier(articlesList: articlesList)..insertTileVals();
 
-          ValueNotifier<List<bool>> tileValues =
-              ValueNotifier(List.filled(articlesList.length, false));
+          // List<SavedArticle> selectedSavedArticles = [];
+
+          // ValueNotifier<List<bool>> tileValues =
+          //     ValueNotifier(List.filled(articlesList.length, false));
 
           return ListenableBuilder(
-            listenable: tileValues,
+            listenable: tileNotifier,
             builder: (context, child) {
               return Column(
                 children: [
                   () {
-                    if (tileValues.value.contains(true)) {
+                    if (tileNotifier.tileValues.contains(true)) {
                       final listContainingTrue =
-                          tileValues.value.where((element) {
+                          tileNotifier.tileValues.where((element) {
                         return element == true;
                       });
                       return Container(
@@ -56,25 +60,19 @@ class OfflineArticlesPage extends StatelessWidget {
                                 ),
                                 Checkbox(
                                   value: () {
-                                    if (tileValues.value.contains(false)) {
+                                    if (tileNotifier.tileValues
+                                        .contains(false)) {
                                       return false;
                                     } else {
                                       return true;
                                     }
                                   }(),
                                   onChanged: (value) {
-                                    if ((tileValues.value.contains(false))) {
-                                      // TODO add to the notifier
-                                      tileValues.value = List.filled(
-                                          articlesList.length, true);
-                                      // Add all
-                                      selectedSavedArticles
-                                          .addAll(articlesList);
+                                    if ((tileNotifier.tileValues
+                                        .contains(false))) {
+                                      tileNotifier.addAllArticles();
                                     } else {
-                                      tileValues.value = List.filled(
-                                          articlesList.length, false);
-                                      // Remove all
-                                      selectedSavedArticles = [];
+                                      tileNotifier.removeAllArticles();
                                     }
                                   },
                                 ),
@@ -111,7 +109,8 @@ class OfflineArticlesPage extends StatelessWidget {
                                                       onPressed: () {
                                                         // Delete items
                                                         for (final savedArticle
-                                                            in selectedSavedArticles) {
+                                                            in tileNotifier
+                                                                .selectedSavedArticles) {
                                                           context
                                                               .read<
                                                                   AppDatabase>()
@@ -173,34 +172,11 @@ class OfflineArticlesPage extends StatelessWidget {
                           selectionControls: DesktopTextSelectionControls(),
                           child: InkWell(
                             onLongPress: () {
-                              tileValues.value[index] =
-                                  !tileValues.value[index];
-                              // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
-                              tileValues.notifyListeners();
-
-                              if (tileValues.value[index] == true) {
-                                selectedSavedArticles.add(articlesList[index]);
-                              } else {
-                                selectedSavedArticles
-                                    .remove(articlesList[index]);
-                              }
+                              tileNotifier.changeValues(index);
                             },
                             onTap: () {
-                              if (tileValues.value.contains(true)) {
-                                tileValues.value[index] =
-                                    !tileValues.value[index];
-                                // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
-                                tileValues.notifyListeners();
-
-                                // Add or remove item
-
-                                if (tileValues.value[index] == true) {
-                                  selectedSavedArticles
-                                      .add(articlesList[index]);
-                                } else {
-                                  selectedSavedArticles
-                                      .remove(articlesList[index]);
-                                }
+                              if (tileNotifier.tileValues.contains(true)) {
+                                tileNotifier.changeValues(index);
                               } else {
                                 Navigator.push(
                                   context,
@@ -216,13 +192,13 @@ class OfflineArticlesPage extends StatelessWidget {
                               }
                             },
                             child: Container(
-                              color: (tileValues.value[index] == false)
+                              color: (tileNotifier.tileValues[index] == false)
                                   ? Colors.black45
                                   : Colors.blueGrey[900],
                               child: Column(
                                 children: [
                                   ListTile(
-                                    selected: tileValues.value[index],
+                                    selected: tileNotifier.tileValues[index],
                                     title: Text(
                                         articlesList[index].newsClass.title),
                                     subtitle: Builder(

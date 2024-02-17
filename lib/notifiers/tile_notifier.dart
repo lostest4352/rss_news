@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:that_app/database/database.dart';
 
-// TODO
 class TileNotifier with ChangeNotifier {
   final List<SavedArticle>? articlesList;
 
@@ -34,7 +33,7 @@ class TileNotifier with ChangeNotifier {
 
   void addAllArticles() {
     if (articlesList != null) {
-      // fill the bool list
+      // fill the bool list with true to select all
       tileValues = List.filled(articlesList!.length, true);
       // Add all articles
       selectedSavedArticles.addAll(articlesList!);
@@ -43,9 +42,9 @@ class TileNotifier with ChangeNotifier {
 
   void removeAllArticles() {
     if (articlesList != null) {
-      // fill the bool list
+      // fill the bool list with false to unselect all
       tileValues = List.filled(articlesList!.length, false);
-      // Add all articles
+      // Remove all articles
       selectedSavedArticles = [];
     }
   }
