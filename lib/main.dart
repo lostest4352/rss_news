@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           initialData: null,
         ),
       ],
-      builder: (context, snapshot) {
+      builder: (context, child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData.dark(),
