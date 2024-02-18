@@ -256,7 +256,7 @@ class OfflineArticlesPage extends StatelessWidget {
                                             overflow: TextOverflow.ellipsis,
                                           );
                                         } else {
-                                          return const Center();
+                                          return const SizedBox();
                                         }
                                       },
                                     ),

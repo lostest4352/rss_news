@@ -158,7 +158,7 @@ class NewsContentPage extends StatelessWidget {
                         },
                       );
                     } else {
-                      return const Center();
+                      return const SizedBox();
                     }
                   },
                 ),
@@ -201,7 +201,7 @@ class NewsContentPage extends StatelessWidget {
                       ),
                     );
                   } else {
-                    return const Center();
+                    return const SizedBox();
                   }
                 },
               ),

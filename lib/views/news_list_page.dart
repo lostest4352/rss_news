@@ -64,7 +64,7 @@ class NewsListPage extends StatelessWidget {
                                       maxLines: 4,
                                     );
                                   } else {
-                                    return const Center();
+                                    return const SizedBox();
                                   }
                                 },
                               ),
@@ -86,7 +86,7 @@ class NewsListPage extends StatelessWidget {
                                       },
                                     );
                                   } else {
-                                    return const Center();
+                                    return const SizedBox();
                                   }
                                 },
                               ),
@@ -107,7 +107,7 @@ class NewsListPage extends StatelessWidget {
                                       },
                                     );
                                   } else {
-                                    return const Center();
+                                    return const SizedBox();
                                   }
                                 },
                               ),
