@@ -27,11 +27,6 @@ class OfflineArticlesPage extends StatelessWidget {
           final TileNotifier tileNotifier =
               TileNotifier(articlesList: articlesList)..insertTileVals();
 
-          // List<SavedArticle> selectedSavedArticles = [];
-
-          // ValueNotifier<List<bool>> tileValues =
-          //     ValueNotifier(List.filled(articlesList.length, false));
-
           return ListenableBuilder(
             listenable: tileNotifier,
             builder: (context, child) {
@@ -68,8 +63,8 @@ class OfflineArticlesPage extends StatelessWidget {
                                     }
                                   }(),
                                   onChanged: (_) {
-                                    if ((tileNotifier.tileValues
-                                        .contains(false))) {
+                                    if (tileNotifier.tileValues
+                                        .contains(false)) {
                                       tileNotifier.addAllArticles();
                                     } else {
                                       tileNotifier.removeAllArticles();
