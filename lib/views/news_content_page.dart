@@ -151,8 +151,9 @@ class NewsContentPage extends StatelessWidget {
                     if (htmlImageLink != null) {
                       return CachedNetworkImage(
                         imageUrl: htmlImageLink,
-                        placeholder: (context, url) =>
-                            const CircularProgressIndicator(),
+                        placeholder: (context, url) => const Center(
+                          child: CircularProgressIndicator(),
+                        ),
                         errorWidget: (context, url, error) {
                           return const Icon(Icons.error);
                         },
@@ -193,8 +194,9 @@ class NewsContentPage extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: CachedNetworkImage(
                         imageUrl: xmlImageLink,
-                        placeholder: (context, url) =>
-                            const CircularProgressIndicator(),
+                        placeholder: (context, url) => const Center(
+                          child: CircularProgressIndicator(),
+                        ),
                         errorWidget: (context, url, error) {
                           return const Icon(Icons.error);
                         },

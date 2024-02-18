@@ -80,7 +80,9 @@ class NewsListPage extends StatelessWidget {
                                     return CachedNetworkImage(
                                       imageUrl: xmlImageLink,
                                       placeholder: (context, url) =>
-                                          const CircularProgressIndicator(),
+                                          const Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
                                       errorWidget: (context, url, error) {
                                         return const Icon(Icons.error);
                                       },
@@ -101,7 +103,9 @@ class NewsListPage extends StatelessWidget {
                                     return CachedNetworkImage(
                                       imageUrl: htmlImageLink,
                                       placeholder: (context, url) =>
-                                          const CircularProgressIndicator(),
+                                          const Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
                                       errorWidget: (context, url, error) {
                                         return const Icon(Icons.error);
                                       },
