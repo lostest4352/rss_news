@@ -194,6 +194,52 @@ class OfflineArticlesPage extends StatelessWidget {
                                 children: [
                                   ListTile(
                                     selected: tileNotifier.tileValues[index],
+                                    leading: SizedBox(
+                                      width: 70,
+                                      height: 70,
+                                      child: Builder(
+                                        builder: (context) {
+                                          //
+                                          final xmlImageLink =
+                                              articlesList[index]
+                                                  .newsClass
+                                                  .xmlImageLink;
+                                          //
+                                          final htmlImageLink =
+                                              articlesList[index]
+                                                  .newsClass
+                                                  .htmlImageLink;
+                                          if (xmlImageLink != null) {
+                                            return CachedNetworkImage(
+                                              imageUrl: xmlImageLink,
+                                              placeholder: (context, url) =>
+                                                  const CircularProgressIndicator(),
+                                              errorWidget:
+                                                  (context, url, error) {
+                                                return const Icon(Icons.error);
+                                              },
+                                            );
+                                          } else if (xmlImageLink == null &&
+                                              htmlImageLink != null) {
+                                            return CachedNetworkImage(
+                                              imageUrl: htmlImageLink,
+                                              placeholder: (context, url) =>
+                                                  const CircularProgressIndicator(),
+                                              errorWidget:
+                                                  (context, url, error) {
+                                                return const Icon(Icons.error);
+                                              },
+                                            );
+                                          } else {
+                                            return const SizedBox(
+                                              child: CircleAvatar(
+                                                child: Icon(Icons.newspaper),
+                                              ),
+                                            );
+                                          }
+                                        },
+                                      ),
+                                    ),
                                     title: Text(
                                         articlesList[index].newsClass.title),
                                     subtitle: Builder(
@@ -206,53 +252,8 @@ class OfflineArticlesPage extends StatelessWidget {
                                             articlesList[index]
                                                 .newsClass
                                                 .description!,
-                                            maxLines: 4,
-                                          );
-                                        } else {
-                                          return const Center();
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                  //
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Builder(
-                                      builder: (context) {
-                                        final xmlImageLink = articlesList[index]
-                                            .newsClass
-                                            .xmlImageLink;
-                                        if (xmlImageLink != null) {
-                                          return CachedNetworkImage(
-                                            imageUrl: xmlImageLink,
-                                            placeholder: (context, url) =>
-                                                const CircularProgressIndicator(),
-                                            errorWidget: (context, url, error) {
-                                              return const Icon(Icons.error);
-                                            },
-                                          );
-                                        } else {
-                                          return const Center();
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Builder(
-                                      builder: (context) {
-                                        final htmlImageLink =
-                                            articlesList[index]
-                                                .newsClass
-                                                .htmlImageLink;
-                                        if (htmlImageLink != null) {
-                                          return CachedNetworkImage(
-                                            imageUrl: htmlImageLink,
-                                            placeholder: (context, url) =>
-                                                const CircularProgressIndicator(),
-                                            errorWidget: (context, url, error) {
-                                              return const Icon(Icons.error);
-                                            },
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
                                           );
                                         } else {
                                           return const Center();
