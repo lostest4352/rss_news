@@ -19,9 +19,8 @@ class OfflineArticlesPage extends StatelessWidget {
       body: MultiProvider(
         providers: [
           SubChangeNotifierProvider<List<SavedArticle>?, TileNotifier>(
-            create: (context, listOfArticles) {
-              return TileNotifier(articlesList: listOfArticles)
-                ..insertTileVals();
+            create: (context, articlesList) {
+              return TileNotifier(articlesList: articlesList)..insertTileVals();
             },
           ),
         ],
