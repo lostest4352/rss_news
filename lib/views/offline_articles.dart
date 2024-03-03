@@ -34,9 +34,12 @@ class OfflineArticlesPage extends StatelessWidget {
                 );
               }
 
+              debugPrint("rebuilt above column");
+
               return Column(
                 children: [
                   () {
+                    debugPrint("rebuilt below column");
                     if (tileNotifier.tileValues.contains(true)) {
                       final listContainingTrue =
                           tileNotifier.tileValues.where((element) {
