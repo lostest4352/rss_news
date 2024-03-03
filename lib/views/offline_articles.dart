@@ -24,6 +24,8 @@ class OfflineArticlesPage extends StatelessWidget {
             );
           }
 
+          debugPrint("rebuilt above column");
+
           final TileNotifier tileNotifier =
               TileNotifier(articlesList: articlesList)..insertTileVals();
 
@@ -33,6 +35,7 @@ class OfflineArticlesPage extends StatelessWidget {
               return Column(
                 children: [
                   () {
+                    debugPrint("rebuilt below column");
                     if (tileNotifier.tileValues.contains(true)) {
                       final listContainingTrue =
                           tileNotifier.tileValues.where((element) {
