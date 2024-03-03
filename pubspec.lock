@@ -302,6 +302,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.3"
+  flutter_sub:
+    dependency: transitive
+    description:
+      name: flutter_sub
+      sha256: "56a7cf25b35c69bfc8ffbf1481da27320b17f5b19121972641be9910d95b4e0c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
+  flutter_sub_provider:
+    dependency: "direct main"
+    description:
+      name: flutter_sub_provider
+      sha256: ac1f7dd7c057d463b0d8b36d75179a21f2931386798ee9f8f39fee0a7ead9bd7
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter

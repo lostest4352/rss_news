@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_sub_provider/flutter_sub_provider.dart';
 import 'package:that_app/database/database.dart';
 import 'package:that_app/notifiers/tile_notifier.dart';
 import 'package:that_app/views/appdrawer.dart';
@@ -16,20 +16,24 @@ class OfflineArticlesPage extends StatelessWidget {
         title: const Text("Saved Articles"),
       ),
       drawer: const AppDrawer(),
-      body: Consumer<List<SavedArticle>?>(
-        builder: (context, articlesList, child) {
-          if (articlesList == null || articlesList.isEmpty) {
-            return const Center(
-              child: Text("No articles saved"),
-            );
-          }
+      body: MultiProvider(
+        providers: [
+          SubChangeNotifierProvider<List<SavedArticle>?, TileNotifier>(
+            create: (context, listOfArticles) {
+              return TileNotifier(articlesList: listOfArticles)
+                ..insertTileVals();
+            },
+          ),
+        ],
+        builder: (context, child) {
+          return Consumer2<List<SavedArticle>?, TileNotifier>(
+            builder: (context, articlesList, tileNotifier, child) {
+              if (articlesList == null || articlesList.isEmpty) {
+                return const Center(
+                  child: Text("No articles saved"),
+                );
+              }
 
-          final TileNotifier tileNotifier =
-              TileNotifier(articlesList: articlesList)..insertTileVals();
-
-          return ListenableBuilder(
-            listenable: tileNotifier,
-            builder: (context, child) {
               return Column(
                 children: [
                   () {
