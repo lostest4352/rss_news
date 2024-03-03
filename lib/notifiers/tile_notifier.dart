@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:that_app/database/database.dart';
 
 class TileNotifier with ChangeNotifier {
-  final List<SavedArticle>? articlesList;
-
-  TileNotifier({required this.articlesList});
+  List<SavedArticle>? articlesList = [];
 
   List<SavedArticle> selectedSavedArticles = [];
 
