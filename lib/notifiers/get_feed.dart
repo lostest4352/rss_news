@@ -82,7 +82,9 @@ class GetFeed with ChangeNotifier {
             final innerTextVal = listElement
                 .findElements("content:encoded")
                 .firstOrNull
-                ?.innerText;
+                ?.innerText
+                .removeTags()
+                .trim();
 
             // Inner text is html
             final htmlDoc = parse(innerTextVal);
