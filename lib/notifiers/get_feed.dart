@@ -71,8 +71,12 @@ class GetFeed with ChangeNotifier {
             listElement.findElements("pubDate").firstOrNull?.innerText;
 
         // dc creator
-        final String? creatorName =
-            listElement.findElements("dc:creator").firstOrNull?.innerText;
+        final String? creatorName = listElement
+            .findElements("dc:creator")
+            .firstOrNull
+            ?.innerText
+            .removeTags()
+            .trim();
 
         // debugPrint(creatorName);
 
@@ -82,9 +86,7 @@ class GetFeed with ChangeNotifier {
             final innerTextVal = listElement
                 .findElements("content:encoded")
                 .firstOrNull
-                ?.innerText
-                .removeTags()
-                .trim();
+                ?.innerText;
 
             // Inner text is html
             final htmlDoc = parse(innerTextVal);
