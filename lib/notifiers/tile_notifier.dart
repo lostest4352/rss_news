@@ -4,7 +4,9 @@ import 'package:that_app/database/database.dart';
 class TileNotifier with ChangeNotifier {
   final List<SavedArticle>? articlesList;
 
-  TileNotifier({required this.articlesList});
+  TileNotifier({required this.articlesList}) {
+    insertTileVals();
+  }
 
   List<SavedArticle> selectedSavedArticles = [];
 

@@ -27,7 +27,7 @@ class OfflineArticlesPage extends StatelessWidget {
           debugPrint("rebuilt above column");
 
           final TileNotifier tileNotifier =
-              TileNotifier(articlesList: articlesList)..insertTileVals();
+              TileNotifier(articlesList: articlesList);
 
           return ListenableBuilder(
             listenable: tileNotifier,
