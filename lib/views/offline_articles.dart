@@ -1,10 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:that_app/database/database.dart';
 import 'package:that_app/notifiers/tile_notifier.dart';
-import 'package:that_app/views/appdrawer.dart';
+import 'package:that_app/views/widgets/appdrawer.dart';
 import 'package:that_app/views/news_content_page.dart';
+import 'package:that_app/views/widgets/title_image.dart';
 
 class OfflineArticlesPage extends StatelessWidget {
   const OfflineArticlesPage({super.key});
@@ -213,32 +213,12 @@ class OfflineArticlesPage extends StatelessWidget {
                                                   .newsClass
                                                   .htmlImageLink;
                                           if (xmlImageLink != null) {
-                                            return CachedNetworkImage(
-                                              imageUrl: xmlImageLink,
-                                              placeholder: (context, url) =>
-                                                  const Center(
-                                                child:
-                                                    CircularProgressIndicator(),
-                                              ),
-                                              errorWidget:
-                                                  (context, url, error) {
-                                                return const Icon(Icons.error);
-                                              },
-                                            );
+                                            return TitleImage(
+                                                imageLink: xmlImageLink);
                                           } else if (xmlImageLink == null &&
                                               htmlImageLink != null) {
-                                            return CachedNetworkImage(
-                                              imageUrl: htmlImageLink,
-                                              placeholder: (context, url) =>
-                                                  const Center(
-                                                child:
-                                                    CircularProgressIndicator(),
-                                              ),
-                                              errorWidget:
-                                                  (context, url, error) {
-                                                return const Icon(Icons.error);
-                                              },
-                                            );
+                                            return TitleImage(
+                                                imageLink: htmlImageLink);
                                           } else {
                                             return const SizedBox(
                                               child: CircleAvatar(

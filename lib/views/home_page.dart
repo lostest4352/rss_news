@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:that_app/notifiers/get_feed.dart';
-import 'package:that_app/views/appdrawer.dart';
+import 'package:that_app/views/widgets/appdrawer.dart';
 import 'package:that_app/views/news_list_page.dart';
 
 class HomePage extends StatelessWidget {
