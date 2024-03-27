@@ -1,9 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:that_app/notifiers/get_feed.dart';
 import 'package:that_app/views/news_content_page.dart';
-import 'package:that_app/views/widgets/title_image.dart';
 
 class NewsListPage extends StatelessWidget {
   final String siteTitle;
@@ -77,7 +77,16 @@ class NewsListPage extends StatelessWidget {
                                   final xmlImageLink =
                                       classList[index].xmlImageLink;
                                   if (xmlImageLink != null) {
-                                    return TitleImage(imageLink: xmlImageLink);
+                                    return CachedNetworkImage(
+                                      imageUrl: xmlImageLink,
+                                      placeholder: (context, url) =>
+                                          const Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                      errorWidget: (context, url, error) {
+                                        return const Icon(Icons.error);
+                                      },
+                                    );
                                   } else {
                                     return const SizedBox();
                                   }
@@ -91,7 +100,16 @@ class NewsListPage extends StatelessWidget {
                                   final htmlImageLink =
                                       classList[index].htmlImageLink;
                                   if (htmlImageLink != null) {
-                                    return TitleImage(imageLink: htmlImageLink);
+                                    return CachedNetworkImage(
+                                      imageUrl: htmlImageLink,
+                                      placeholder: (context, url) =>
+                                          const Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                      errorWidget: (context, url, error) {
+                                        return const Icon(Icons.error);
+                                      },
+                                    );
                                   } else {
                                     return const SizedBox();
                                   }

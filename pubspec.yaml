@@ -39,13 +39,13 @@ dependencies:
   xml: ^6.3.0
   http: ^1.1.0
   html_unescape: ^2.0.0
+  cached_network_image: ^3.3.1
   path_provider: ^2.1.2
   html: ^0.15.4
   url_launcher: ^6.2.3
   drift: ^2.14.0
   sqlite3_flutter_libs: ^0.5.20
   path: ^1.8.3
-  extended_image: ^8.2.0
 
 dev_dependencies:
   flutter_test:

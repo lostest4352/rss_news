@@ -1,9 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:that_app/database/database.dart';
 
 import 'package:that_app/models/news_class.dart';
-import 'package:that_app/views/widgets/title_image.dart';
 import 'package:url_launcher/link.dart';
 
 class NewsContentPage extends StatelessWidget {
@@ -149,7 +149,15 @@ class NewsContentPage extends StatelessWidget {
                   builder: (context) {
                     final htmlImageLink = newsClass.htmlImageLink;
                     if (htmlImageLink != null) {
-                      return TitleImage(imageLink: htmlImageLink);
+                      return CachedNetworkImage(
+                        imageUrl: htmlImageLink,
+                        placeholder: (context, url) => const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        errorWidget: (context, url, error) {
+                          return const Icon(Icons.error);
+                        },
+                      );
                     } else {
                       return const SizedBox();
                     }
@@ -184,7 +192,15 @@ class NewsContentPage extends StatelessWidget {
                   if (xmlImageLink != null) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: TitleImage(imageLink: xmlImageLink),
+                      child: CachedNetworkImage(
+                        imageUrl: xmlImageLink,
+                        placeholder: (context, url) => const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        errorWidget: (context, url, error) {
+                          return const Icon(Icons.error);
+                        },
+                      ),
                     );
                   } else {
                     return const SizedBox();
